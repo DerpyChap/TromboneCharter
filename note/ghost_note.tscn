@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://75ym6x770tcm"]
+
+[ext_resource type="Script" path="res://note/ghost_note.gd" id="1_sc37p"]
+
+[node name="Note" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 1
+script = ExtResource("1_sc37p")
+
+[node name="PitchHandle" type="Control" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+focus_mode = 1
+mouse_default_cursor_shape = 14
+
+[node name="EndHandle" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+focus_mode = 1
+mouse_default_cursor_shape = 6
+
+[node name="BarHandle" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+focus_mode = 1
+mouse_default_cursor_shape = 15

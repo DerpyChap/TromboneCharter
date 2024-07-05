@@ -17,6 +17,7 @@ const BLACK_KEYS = [
 ]
 const NUM_KEYS = 27
 @onready var working_tmb = TMBInfo.new()
+@onready var comp_tmb = TMBInfo.new()
 @onready var ffmpeg_worker = FFmpegWorker.new(self)
 var settings : Settings
 func beat_to_time(beat:float) -> float: return beat / (working_tmb.tempo / 60.0)

@@ -29,6 +29,7 @@ var key_height : float:
 var current_subdiv : float:
 	get: return 1.0 / %TimingSnap.value
 var note_scn = preload("res://note/note.tscn")
+var ghost_note_scn = preload("res://note/ghost_note.tscn")
 var settings : Settings:
 	get: return Global.settings
 var bar_font : Font
@@ -49,6 +50,8 @@ func bar_to_x(bar:float): return bar * bar_spacing
 @onready var measure_font : Font = ThemeDB.get_fallback_font()
 @onready var tmb : TMBInfo:
 	get: return Global.working_tmb
+@onready var comp_tmb : TMBInfo:
+	get: return Global.comp_tmb
 
 
 var EDIT_MODE := 0
@@ -68,6 +71,7 @@ func doot(pitch:float):
 func _ready():
 	bar_font = measure_font.duplicate()
 	main.chart_loaded.connect(_on_tmb_loaded)
+	main.comp_chart_loaded.connect(_on_comp_tmb_loaded)
 	Global.tmb_updated.connect(_on_tmb_updated)
 	%TimingSnap.value_changed.connect(timing_snap_changed)
 
@@ -160,6 +164,27 @@ func _on_tmb_loaded():
 	doot_enabled = %DootToggle.button_pressed
 	_on_tmb_updated()
 
+# TODO: Avoid duplicating this
+func _on_comp_tmb_loaded():
+	var children := get_children()
+	clearing_notes = true
+	for i in children.size():
+		var child = children[-(i + 1)]
+		if child is GhostNote: child.queue_free()
+	await(get_tree().process_frame)
+	clearing_notes = false
+	
+	doot_enabled = false
+	for note in comp_tmb.notes:
+		add_ghost_note(false,
+				note[TMBInfo.NOTE_BAR],
+				note[TMBInfo.NOTE_LENGTH],
+				note[TMBInfo.NOTE_PITCH_START],
+				note[TMBInfo.NOTE_PITCH_DELTA]
+		)
+	doot_enabled = %DootToggle.button_pressed
+	_on_tmb_updated()
+
 
 func add_note(start_drag:bool, bar:float, length:float, pitch:float, pitch_delta:float = 0.0):
 	var new_note : Note = note_scn.instantiate()
@@ -173,6 +198,19 @@ func add_note(start_drag:bool, bar:float, length:float, pitch:float, pitch_delta
 	if doot_enabled: doot(pitch)
 	add_child(new_note)
 	new_note.grab_focus()
+
+# TODO: don't duplicate this function
+func add_ghost_note(start_drag:bool, bar:float, length:float, pitch:float, pitch_delta:float = 0.0):
+	var new_note = ghost_note_scn.instantiate()
+	new_note.bar = bar
+	new_note.length = length
+	new_note.pitch_start = pitch
+	new_note.pitch_delta = pitch_delta
+	new_note.position.x = bar_to_x(bar)
+	new_note.position.y = pitch_to_height(pitch)
+	new_note.dragging = Note.DRAG_INITIAL if start_drag else Note.DRAG_NONE
+	add_child(new_note)
+	move_child(new_note, 0)
 
 # move to ???
 func continuous_note_overlaps(time:float, length:float, exclude : Array = []) -> bool:
@@ -196,7 +234,7 @@ func continuous_note_overlaps(time:float, length:float, exclude : Array = []) ->
 func update_note_array():
 	var new_array := []
 	for note in get_children():
-		if !(note is Note) || note.is_queued_for_deletion():
+		if !(note is Note) || note.is_queued_for_deletion() || (note is GhostNote):
 			continue
 		var note_array := [
 			note.bar, note.length, note.pitch_start, note.pitch_delta,

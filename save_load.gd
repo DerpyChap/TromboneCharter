@@ -9,22 +9,30 @@ var tmb:TMBInfo:
 	get: return main.tmb
 	set(value): assert(false)
 
+var comp_tmb:TMBInfo:
+	get: return main.comp_tmb
+	set(value): assert(false)
+
 # TODO  - ton of functions called from main that we should own instead
 #		- this should own chart_loaded signal but i'm not fixing it right now!
-func on_load_dialog_file_selected(path:String):
+func on_load_dialog_file_selected(path:String, comparison:bool = false):
 	print("Load tmb from %s" % path)
 	var dir = path.substr(0,path.rfind("/"))
 	if dir == path: dir = path.substr(0,path.rfind("\\"))
-	var err = tmb.load_from_file(path)
+	var err
+	if not comparison:
+		err = tmb.load_from_file(path)
+	else:
+		err = comp_tmb.load_from_file(path)
 	if err:
 		%ErrorPopup.dialog_text = "TMB load failed.\n%s" % TMBInfo.load_result_string(err)
 		main.show_popup(%ErrorPopup)
 		return dir
-	
-	%SaveDialog.current_dir = dir
-	%SaveDialog.current_path = path
-	cfg.set_value("Config","saved_dir", dir)
-	main.try_cfg_save()
+	if not comparison:
+		%SaveDialog.current_dir = dir
+		%SaveDialog.current_path = path
+		cfg.set_value("Config","saved_dir", dir)
+		main.try_cfg_save()
 	return dir
 
 

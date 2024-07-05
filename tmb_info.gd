@@ -1,5 +1,5 @@
 class_name TMBInfo
-extends Node
+# extends Node
 
 # { bar, length, start_pitch, delta_pitch, end_pitch } all floats
 enum {

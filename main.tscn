@@ -99,6 +99,16 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.tmb")
 
+[node name="LoadCompDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Load Chart"
+size = Vector2i(600, 360)
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.tmb")
+
 [node name="SaveDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
 title = "Save Chart"
@@ -634,6 +644,10 @@ layout_mode = 2
 size_flags_vertical = 10
 text = "Force note refresh"
 
+[node name="LoadCompChart" type="Button" parent="Settings/MarginC/HBoxC/EditSettings"]
+layout_mode = 2
+text = "Load Comparison Chart"
+
 [node name="SectionSelection" type="VBoxContainer" parent="Settings/MarginC/HBoxC"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -817,6 +831,7 @@ text = "toot toot lol"
 [connection signal="confirmed" from="NewChartConfirm" to="." method="_on_new_chart_confirmed"]
 [connection signal="confirmed" from="CopyConfirm" to="CopyConfirm" method="_on_copy_confirmed"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]
+[connection signal="file_selected" from="LoadCompDialog" to="." method="_on_load_comp_dialog_file_selected"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
 [connection signal="meta_clicked" from="Instructions/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
 [connection signal="meta_clicked" from="FFmpegInstructions/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
@@ -851,6 +866,7 @@ text = "toot toot lol"
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/HBox/FFmpegHelp" to="." method="_on_ffmpeg_help_pressed"]
 [connection signal="item_selected" from="Settings/MarginC/HBoxC/EditSettings/PreviewType" to="PianoRoll/ChartView/Chart/WavePreview" method="_on_preview_type_item_selected"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/RefreshButton" to="." method="_on_refresh_button_pressed"]
+[connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/LoadCompChart" to="." method="_on_load_comp_chart_pressed"]
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/SectionSelection/HBox/SectionStart" to="Settings" method="_on_section_start_value_changed"]
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/SectionSelection/HBox/SectionLength" to="Settings" method="_on_section_length_value_changed"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/SectionSelection/HBox4/PreviewButton" to="PreviewController" method="_do_preview"]

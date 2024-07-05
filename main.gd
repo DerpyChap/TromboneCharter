@@ -5,9 +5,13 @@ extends Control
 @onready var settings : Settings = %Settings
 @onready var ffmpeg_worker : FFmpegWorker = Global.ffmpeg_worker
 signal chart_loaded
+signal comp_chart_loaded
 var tmb : TMBInfo:
 	get: return Global.working_tmb
 	set(value): Global.working_tmb = value
+var comp_tmb : TMBInfo:
+	get: return Global.comp_tmb
+	set(value): Global.comp_tmb = value
 var popup_location : Vector2i:
 	get: return DisplayServer.window_get_position(0) + (Vector2i.ONE * 100)
 
@@ -106,6 +110,7 @@ func _on_new_chart_confirmed():
 
 
 func _on_load_chart_pressed(): show_popup($LoadDialog)
+func _on_load_comp_chart_pressed(): show_popup($LoadCompDialog)
 func _on_load_dialog_file_selected(path:String) -> void:
 	%WavePreview.clear_wave_preview()
 	var dir = saveload.on_load_dialog_file_selected(path)
@@ -115,6 +120,9 @@ func _on_load_dialog_file_selected(path:String) -> void:
 	if err: print("No stream loaded -- %s" % error_string(err))
 	if %BuildWaveform.button_pressed: %WavePreview.build_wave_preview()
 
+func _on_load_comp_dialog_file_selected(path:String) -> void:
+	saveload.on_load_dialog_file_selected(path, true)
+	emit_signal("comp_chart_loaded")
 
 func _on_save_chart_pressed():
 	tmb.lyrics = %LyricsEditor.package_lyrics()
