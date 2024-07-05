@@ -113,7 +113,7 @@ func load_from_file(filename:String) -> int:
 	description = data.description
 	trackRef    = data.trackRef
 	
-	year		= data.year
+	year		= int(data.year)
 	tempo		= data.tempo
 	endpoint	= data.endpoint
 	timesig 	= data.timesig

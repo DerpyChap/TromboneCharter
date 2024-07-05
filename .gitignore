@@ -1,6 +1,8 @@
 # Godot 4+ specific ignores
 .godot/
 
+.vscode/
+
 # Godot doesn't like it when export folders don't exist
 build/**/*.*
 !*.gitkeep
