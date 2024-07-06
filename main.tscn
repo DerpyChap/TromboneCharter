@@ -97,17 +97,19 @@ ok_button_text = "Open"
 mode_overrides_title = false
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.tmb")
+filters = PackedStringArray("*.tmb ; Trombone Champ Chart")
+use_native_dialog = true
 
 [node name="LoadCompDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
-title = "Load Chart"
+title = "Select a chart to compare with"
 size = Vector2i(600, 360)
 ok_button_text = "Open"
 mode_overrides_title = false
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.tmb")
+filters = PackedStringArray("*.tmb ; Trombone Champ Chart")
+use_native_dialog = true
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
@@ -116,7 +118,8 @@ size = Vector2i(600, 360)
 ok_button_text = "Save"
 mode_overrides_title = false
 access = 2
-filters = PackedStringArray("*.tmb")
+filters = PackedStringArray("*.tmb ; Trombone Champ Chart")
+use_native_dialog = true
 
 [node name="ErrorPopup" type="AcceptDialog" parent="."]
 unique_name_in_owner = true
