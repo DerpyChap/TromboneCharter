@@ -2,7 +2,7 @@ class_name GhostNote
 extends Note
 
 func _init():
-    modulate = Color(1, 1, 1, 0.5)
+    modulate = Color(1, 1, 1, 0.4)
     set_process_input(false)
 
 func _gui_input(_event):

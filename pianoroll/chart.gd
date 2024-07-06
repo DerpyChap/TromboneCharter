@@ -183,7 +183,7 @@ func _on_comp_tmb_loaded():
 				note[TMBInfo.NOTE_PITCH_DELTA]
 		)
 	doot_enabled = %DootToggle.button_pressed
-	_on_tmb_updated()
+	_update_queued = true
 
 
 func add_note(start_drag:bool, bar:float, length:float, pitch:float, pitch_delta:float = 0.0):
@@ -436,3 +436,14 @@ func _on_mouse_entered():
 	if Input.is_key_pressed(KEY_SHIFT):
 		show_preview = true
 		queue_redraw()
+
+func _on_show_hide_comp_chart_toggled(toggled_on:bool) -> void:
+	var children := get_children()
+	if !toggled_on:
+		for child in children:
+			if child is GhostNote:
+				child.visible = false
+	else:
+		for child in children:
+			if child is GhostNote:
+				child.visible = true

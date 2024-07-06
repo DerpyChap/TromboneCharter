@@ -46,7 +46,7 @@ func build_wave_preview():
 	%BuildWaveform.disabled = true
 	%HiResWave.disabled = true
 	%PreviewType.disabled = true
-	%PreviewGenLabel.visible = true
+	%PreviewGenLabel.text = "Generating audio preview..."
 
 	var textures : Array = []
 
@@ -70,7 +70,7 @@ func build_wave_preview():
 	%BuildWaveform.disabled = false
 	%HiResWave.disabled = false
 	%PreviewType.disabled = false
-	%PreviewGenLabel.visible = false
+	%PreviewGenLabel.text = ""
 
 	await get_tree().process_frame
 	calculate_width()

@@ -44,6 +44,7 @@ func _ready():
 		return
 	
 	$LoadDialog.current_dir = cfg.get_value("Config","saved_dir") if !err else "."
+	$LoadCompDialog.current_dir = cfg.get_value("Config","saved_dir") if !err else "."
 	
 	_on_new_chart_confirmed()
 
@@ -113,6 +114,8 @@ func _on_load_chart_pressed(): show_popup($LoadDialog)
 func _on_load_comp_chart_pressed(): show_popup($LoadCompDialog)
 func _on_load_dialog_file_selected(path:String) -> void:
 	%WavePreview.clear_wave_preview()
+	%ShowHideCompChart.button_pressed = false
+	%ShowHideCompChart.disabled = true
 	var dir = saveload.on_load_dialog_file_selected(path)
 	%TrackPlayer.stream = null
 	emit_signal("chart_loaded")
@@ -122,6 +125,8 @@ func _on_load_dialog_file_selected(path:String) -> void:
 
 func _on_load_comp_dialog_file_selected(path:String) -> void:
 	saveload.on_load_dialog_file_selected(path, true)
+	%ShowHideCompChart.button_pressed = true
+	%ShowHideCompChart.disabled = false
 	emit_signal("comp_chart_loaded")
 
 func _on_save_chart_pressed():

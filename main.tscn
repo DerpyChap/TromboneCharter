@@ -633,9 +633,7 @@ popup/item_1/id = 1
 
 [node name="PreviewGenLabel" type="Label" parent="Settings/MarginC/HBoxC/EditSettings"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
-text = "Generating audio preview..."
 horizontal_alignment = 1
 
 [node name="RefreshButton" type="Button" parent="Settings/MarginC/HBoxC/EditSettings"]
@@ -644,9 +642,18 @@ layout_mode = 2
 size_flags_vertical = 10
 text = "Force note refresh"
 
-[node name="LoadCompChart" type="Button" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings"]
+layout_mode = 2
+
+[node name="LoadCompChart" type="Button" parent="Settings/MarginC/HBoxC/EditSettings/HBoxContainer"]
 layout_mode = 2
 text = "Load Comparison Chart"
+
+[node name="ShowHideCompChart" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Visible"
 
 [node name="SectionSelection" type="VBoxContainer" parent="Settings/MarginC/HBoxC"]
 unique_name_in_owner = true
@@ -866,7 +873,8 @@ text = "toot toot lol"
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/HBox/FFmpegHelp" to="." method="_on_ffmpeg_help_pressed"]
 [connection signal="item_selected" from="Settings/MarginC/HBoxC/EditSettings/PreviewType" to="PianoRoll/ChartView/Chart/WavePreview" method="_on_preview_type_item_selected"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/RefreshButton" to="." method="_on_refresh_button_pressed"]
-[connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/LoadCompChart" to="." method="_on_load_comp_chart_pressed"]
+[connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/HBoxContainer/LoadCompChart" to="." method="_on_load_comp_chart_pressed"]
+[connection signal="toggled" from="Settings/MarginC/HBoxC/EditSettings/HBoxContainer/ShowHideCompChart" to="PianoRoll/ChartView/Chart" method="_on_show_hide_comp_chart_toggled"]
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/SectionSelection/HBox/SectionStart" to="Settings" method="_on_section_start_value_changed"]
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/SectionSelection/HBox/SectionLength" to="Settings" method="_on_section_length_value_changed"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/SectionSelection/HBox4/PreviewButton" to="PreviewController" method="_do_preview"]
