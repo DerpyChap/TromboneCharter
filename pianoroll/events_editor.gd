@@ -3,6 +3,7 @@ extends Control
 
 var event_scn = preload("res://bgevent.tscn")
 @onready var chart = %Chart
+@onready var viewport = get_viewport()
 
 var _update_queued := false
 
@@ -63,8 +64,12 @@ func _gui_input(event):
     if Input.is_key_pressed(KEY_SHIFT):
         %Chart.update_playhead(event)
         return
-    if event is InputEventMouseButton and event.double_click:
+    if !(event is InputEventMouseButton):
+        return
+    if event.double_click:
         var bar = %Chart.x_to_bar(event.position.x)
         if %Settings.snap_time: bar = snapped(bar, chart.current_subdiv)
         var new_event = _add_event(bar,0)
-        new_event.spin_box.grab_focus()
+        new_event.spin_box.get_line_edit().grab_focus()
+    elif !event.is_released():
+        viewport.gui_release_focus()
