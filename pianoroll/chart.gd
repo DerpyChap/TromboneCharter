@@ -108,6 +108,7 @@ func _do_tmb_update():
 	%SectionLength.max_value = max(1, tmb.endpoint - %SectionStart.value)
 	%PlayheadPos.max_value = tmb.endpoint
 	%LyricsEditor._update_lyrics()
+	%EventsEditor._update_events()
 	%Settings._update_handles()
 	for note in get_children():
 		if !(note is Note) || note.is_queued_for_deletion():

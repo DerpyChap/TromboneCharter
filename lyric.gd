@@ -2,10 +2,10 @@ class_name Lyric
 extends Control
 
 var dragging : bool = false
-var bar : float:
-	set(value):
-		bar = value
-		if chart != null: position.x = chart.bar_to_x(bar)
+var bar : float: set = _set_bar
+func _set_bar(value):
+	bar = value
+	if chart != null: position.x = chart.bar_to_x(bar)
 var text : String:
 	set(value):
 		text = value

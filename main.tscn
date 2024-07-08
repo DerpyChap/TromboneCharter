@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dqnjrk008ccpy"]
+[gd_scene load_steps=28 format=3 uid="uid://dqnjrk008ccpy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_4hx5p"]
 [ext_resource type="Script" path="res://save_load.gd" id="2_37xub"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://pianoroll/lyrics_editor.gd" id="11_nxuar"]
 [ext_resource type="Texture2D" uid="uid://ca0siccuqmqat" path="res://resetbutton-thick.svg" id="14_8wa4s"]
 [ext_resource type="Script" path="res://alert.gd" id="16_yl2q4"]
+[ext_resource type="Script" path="res://pianoroll/events_editor.gd" id="17_baaho"]
 
 [sub_resource type="Theme" id="Theme_eswg4"]
 default_font_size = 14
@@ -38,7 +39,8 @@ border_color = Color(0.25098, 0.25098, 0.25098, 1)
 anchors_preset = -1
 anchor_right = 1.011
 anchor_bottom = 1.0
-offset_right = -14.0801
+offset_left = -5.0
+offset_right = -8.08008
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_eswg4")
@@ -309,6 +311,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_nxuar")
 
+[node name="EventsEditor" type="Control" parent="PianoRoll/ChartView/Chart"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_baaho")
+
 [node name="PlayheadHandle" type="Control" parent="PianoRoll/ChartView/Chart"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -501,7 +514,7 @@ script = ExtResource("10_14v0o")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/v_separation = 2
+theme_override_constants/v_separation = 1
 
 [node name="ZoomEntry" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings"]
 layout_mode = 2
@@ -568,6 +581,11 @@ suffix = "semitones"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Draw Microtones"
+
+[node name="ShowEvents" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show event editor"
 
 [node name="InsertTapNotes" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
 unique_name_in_owner = true
@@ -838,6 +856,7 @@ theme_override_constants/outline_size = 6
 text = "toot toot lol"
 
 [connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/LyricsEditor" method="_on_chart_loaded"]
+[connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/EventsEditor" method="_on_chart_loaded"]
 [connection signal="confirmed" from="NewChartConfirm" to="." method="_on_new_chart_confirmed"]
 [connection signal="confirmed" from="CopyConfirm" to="CopyConfirm" method="_on_copy_confirmed"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]
@@ -867,6 +886,7 @@ text = "toot toot lol"
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/EditSettings/TimeSnapping/TimingSnap" to="Settings" method="_on_timing_snap_value_changed"]
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/EditSettings/PitchSnapping/PitchSnap" to="PianoRoll/ChartView" method="_on_pitch_snap_value_changed"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/DrawMicrotones" to="PianoRoll/ChartView" method="queue_redraw"]
+[connection signal="toggled" from="Settings/MarginC/HBoxC/EditSettings/ShowEvents" to="PianoRoll/ChartView/Chart/EventsEditor" method="_on_show_events_toggled"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/InsertTapNotes" to="PianoRoll/ChartView" method="queue_redraw"]
 [connection signal="toggled" from="Settings/MarginC/HBoxC/EditSettings/DootToggle" to="PianoRoll/ChartView/Chart" method="_on_doot_toggle_toggled"]
 [connection signal="toggled" from="Settings/MarginC/HBoxC/EditSettings/PropagateChanges" to="PianoRoll/ChartView/Chart" method="_on_show_targets_toggled"]

@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://bff0vks45russ"]
+
+[ext_resource type="Script" path="res://event.gd" id="1_qofpu"]
+[ext_resource type="Texture2D" uid="uid://bf23fo001m0n4" path="res://trashcan.svg" id="2_v4asq"]
+[ext_resource type="Texture2D" uid="uid://cu0ygufwrvrfu" path="res://draghandle.svg" id="3_qch4g"]
+
+[node name="BGEvent" type="Control"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+script = ExtResource("1_qofpu")
+
+[node name="DeleteButton" type="Button" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+focus_mode = 1
+icon = ExtResource("2_v4asq")
+
+[node name="SpinBox" type="SpinBox" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.133
+anchor_bottom = 0.133
+offset_top = 84.2
+offset_right = 83.0625
+offset_bottom = 115.2
+min_value = -1e+12
+max_value = 1e+12
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="LineEdit" type="LineEdit" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_bottom = 0.75
+offset_top = -285.0
+offset_right = 67.0625
+offset_bottom = -254.0
+grow_vertical = 2
+expand_to_text_length = true
+
+[node name="DragHandle" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_bottom = 0.75
+offset_left = -4.0
+offset_top = -320.0
+offset_right = 4.0
+offset_bottom = -296.0
+grow_vertical = 2
+focus_mode = 1
+mouse_default_cursor_shape = 15
+texture_normal = ExtResource("3_qch4g")
+
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="focus_entered" from="SpinBox" to="." method="_on_line_edit_focus_entered"]
+[connection signal="gui_input" from="SpinBox" to="." method="_on_spin_box_gui_input"]
+[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]
+[connection signal="focus_entered" from="LineEdit" to="." method="_on_line_edit_focus_entered"]
+[connection signal="gui_input" from="LineEdit" to="." method="_on_line_edit_gui_input"]
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="gui_input" from="DragHandle" to="." method="_on_drag_handle_gui_input"]

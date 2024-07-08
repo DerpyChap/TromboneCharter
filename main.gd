@@ -131,6 +131,7 @@ func _on_load_comp_dialog_file_selected(path:String) -> void:
 
 func _on_save_chart_pressed():
 	tmb.lyrics = %LyricsEditor.package_lyrics()
+	tmb.bgdata = %EventsEditor.package_events()
 	if Input.is_key_pressed(KEY_SHIFT):
 		_on_save_dialog_file_selected($SaveDialog.current_path)
 	else: show_popup($SaveDialog)

@@ -18,7 +18,7 @@ func _process(_delta): if _update_queued: _update_lyrics()
 func package_lyrics() -> Array:
 	var result := []
 	for lyric in get_children():
-		if !(lyric is Lyric) || lyric.is_queued_for_deletion(): continue
+		if !(lyric is Lyric) || lyric.is_queued_for_deletion() || (lyric is BGEvent): continue
 		var dict := {
 			"bar" = lyric.bar,
 			"text" = lyric.text
@@ -38,7 +38,7 @@ func _add_lyric(bar:float,lyric:String):
 
 func _update_lyrics():
 	for child in get_children():
-		if !(child is Lyric): continue
+		if !(child is Lyric) || (child is BGEvent): continue
 		child.position.x = chart.bar_to_x(child.bar)
 	_update_queued = false
 
@@ -49,7 +49,7 @@ func _refresh_lyrics():
 	
 	for i in children.size():
 		var child = children[-(i + 1)]
-		if child is Lyric && !child.is_queued_for_deletion():
+		if child is Lyric && !child.is_queued_for_deletion() && !(child is BGEvent):
 			child.queue_free()
 	
 	for lyric in Global.working_tmb.lyrics:
