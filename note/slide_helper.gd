@@ -54,13 +54,17 @@ func find_touching_notes() -> Dictionary:
 
 
 func get_matching_note_on(time:float, exclude:Array = []): # -> Note or null
+	var is_ghost_note = owner is GhostNote
 	for note in chart.get_children():
-		if !(note is Note) || (note in exclude) || (note is GhostNote): continue
+		if !(note is Note) || (note in exclude): continue
+		if (note is GhostNote) != is_ghost_note: continue
 		if abs(note.bar - time) < 0.01: return note
 	return null
 func get_matching_note_off(time:float, exclude:Array = []): # -> Note or null
+	var is_ghost_note = owner is GhostNote
 	for note in chart.get_children():
-		if !(note is Note) || (note in exclude) || (note is GhostNote): continue
+		if !(note is Note) || (note in exclude): continue
+		if (note is GhostNote) != is_ghost_note: continue
 		if abs(note.end - time) < 0.01: return note
 	return null
 
