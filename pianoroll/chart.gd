@@ -89,9 +89,11 @@ func _on_scroll_change():
 
 
 func redraw_notes():
+	var ghost_notes_visible = %ShowHideCompChart.button_pressed
 	for child in get_children():
 		if !(child is Note): continue
 		if child.is_in_view:
+			if (child is GhostNote) && !ghost_notes_visible: continue
 			child.show()
 			child.resize_handles()
 			#child.queue_redraw()
