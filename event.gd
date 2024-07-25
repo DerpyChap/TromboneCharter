@@ -39,4 +39,5 @@ func _on_delete_button_pressed():
 
 func _on_spin_box_value_changed(new_id):
     id = new_id
+    Global.working_tmb.bgdata = editor.package_events()
     queue_redraw()

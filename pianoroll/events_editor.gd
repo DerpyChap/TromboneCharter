@@ -20,6 +20,7 @@ func _add_event(bar:float,id:int):
     new_event.id = id
     new_event.bar = bar
     add_child(new_event)
+    Global.working_tmb.bgdata = package_events()
     return new_event
 
 func _update_events():

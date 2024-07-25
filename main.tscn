@@ -74,6 +74,10 @@ volume_db = -5.0
 unique_name_in_owner = true
 stream = ExtResource("5_vqfbf")
 
+[node name="EventsAPI" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("27_trcdr")
+
 [node name="NewChartConfirm" type="ConfirmationDialog" parent="."]
 title = "You Sure?"
 position = Vector2i(200, 200)
@@ -962,10 +966,6 @@ theme_override_colors/font_color = Color(1, 0.266667, 0.4, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "toot toot lol"
-
-[node name="EventsAPI" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("27_trcdr")
 
 [connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/LyricsEditor" method="_on_chart_loaded"]
 [connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/EventsEditor" method="_on_chart_loaded"]

@@ -9,6 +9,11 @@ enum {
 	NOTE_PITCH_DELTA,
 	NOTE_PITCH_END
 }
+enum {
+	EVENT_SECONDS,
+	EVENT_ID,
+	EVENT_BEAT
+}
 enum LoadResult {
 	SUCCESS,
 	TMB_INVALID,
