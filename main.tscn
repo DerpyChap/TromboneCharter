@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dqnjrk008ccpy"]
+[gd_scene load_steps=30 format=3 uid="uid://dqnjrk008ccpy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_4hx5p"]
 [ext_resource type="Script" path="res://save_load.gd" id="2_37xub"]
@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://ca0siccuqmqat" path="res://resetbutton-thick.svg" id="14_8wa4s"]
 [ext_resource type="Script" path="res://alert.gd" id="16_yl2q4"]
 [ext_resource type="Script" path="res://pianoroll/events_editor.gd" id="17_baaho"]
+[ext_resource type="Script" path="res://event_button.gd" id="26_0mxbw"]
+[ext_resource type="Script" path="res://events_api.gd" id="27_trcdr"]
 
 [sub_resource type="Theme" id="Theme_eswg4"]
 default_font_size = 14
@@ -225,6 +227,112 @@ tab_size = 2
 [node name="Button" type="Button" parent="DiffCalc/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "OK"
+
+[node name="EventTester" type="Window" parent="."]
+unique_name_in_owner = true
+title = "Events Previewer"
+position = Vector2i(0, 36)
+size = Vector2i(345, 300)
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="EventTester"]
+offset_right = 345.0
+offset_bottom = 300.0
+
+[node name="MarginContainer" type="MarginContainer" parent="EventTester/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="VFlowContainer" type="VFlowContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="PlayConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayConfetti"
+script = ExtResource("26_0mxbw")
+event_id = -1
+
+[node name="PlaySongColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlaySongColorConfetti"
+script = ExtResource("26_0mxbw")
+event_id = -2
+
+[node name="PlayStartColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayStartColorConfetti"
+script = ExtResource("26_0mxbw")
+event_id = -3
+
+[node name="PlayEndColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayEndColorConfetti"
+script = ExtResource("26_0mxbw")
+event_id = -4
+
+[node name="PlayFireworks" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayFireworks"
+script = ExtResource("26_0mxbw")
+event_id = -10
+
+[node name="PlayFireworkComet" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayFireworkComet"
+script = ExtResource("26_0mxbw")
+event_id = -11
+
+[node name="PlayFireworkPion" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayFireworkPion"
+script = ExtResource("26_0mxbw")
+event_id = -12
+
+[node name="PlayFireworkPalm" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayFireworkPalm"
+script = ExtResource("26_0mxbw")
+event_id = -13
+
+[node name="PlayFireworkCrossover" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayFireworkCrossover"
+script = ExtResource("26_0mxbw")
+event_id = -14
+
+[node name="PlayFireworkFlare" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayFireworkFlare"
+script = ExtResource("26_0mxbw")
+event_id = -15
+
+[node name="PlayAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlayAurora"
+script = ExtResource("26_0mxbw")
+event_id = -20
+
+[node name="PlaySongColorAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+text = "PlaySongColorAurora"
+script = ExtResource("26_0mxbw")
+event_id = -21
+
+[node name="StopEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Stop All Events"
 
 [node name="PianoRoll" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(360, 270)
@@ -855,6 +963,10 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "toot toot lol"
 
+[node name="EventsAPI" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("27_trcdr")
+
 [connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/LyricsEditor" method="_on_chart_loaded"]
 [connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/EventsEditor" method="_on_chart_loaded"]
 [connection signal="confirmed" from="NewChartConfirm" to="." method="_on_new_chart_confirmed"]
@@ -869,6 +981,8 @@ text = "toot toot lol"
 [connection signal="size_changed" from="DiffCalc" to="." method="_on_diff_calc_win_size_changed"]
 [connection signal="meta_clicked" from="DiffCalc/PanelContainer/VBoxContainer/PanelContainer/CalcInfo" to="." method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="DiffCalc/PanelContainer/VBoxContainer/Button" to="." method="_on_diff_ok_button_pressed"]
+[connection signal="close_requested" from="EventTester" to="EventsAPI" method="_on_event_window_close_requested"]
+[connection signal="pressed" from="EventTester/PanelContainer/MarginContainer/VBoxContainer/StopEvents" to="EventsAPI" method="_on_stop_events_pressed"]
 [connection signal="pressed" from="PianoRoll/Piano/Button" to="PianoRoll/Piano" method="_on_button_pressed"]
 [connection signal="mouse_entered" from="PianoRoll/ChartView/Chart" to="PianoRoll/ChartView/Chart" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PianoRoll/ChartView/Chart" to="PianoRoll/ChartView/Chart" method="_on_mouse_exited"]

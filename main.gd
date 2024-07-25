@@ -65,6 +65,8 @@ func _input(event):
 		else:
 			%Chart.show_preview = false
 		%Chart.queue_redraw()
+	if event.pressed && event.is_action_pressed("show_event_tester"):
+		show_popup(%EventTester)
 	if event.pressed && event.is_action_pressed("ui_copy"):
 		_on_copy()
 	if event.pressed && event.is_action_pressed("ui_paste"):
