@@ -35,13 +35,14 @@ var table_header = "
 [cell border=#fff padding=4,2,4,0][b]Value[/b][/cell][cell][/cell]"
 
 
-func _on_toottally_request_completed(_result, response_code, _headers, body):
+func _on_toottally_request_completed(_result, response_code, _headers, body, http_request):
 	if response_code != HTTPClient.ResponseCode.RESPONSE_OK:
 		push_error("An error occured while submitting to TootTally: Response Code %s" % response_code)
 		%Alert.alert("Couldn't submit! Code %s" % response_code,
 				Vector2(global_position.x + 20, global_position.y - 20),
 				Alert.LV_ERROR, 2)
 		disabled = false
+		http_request.queue_free()
 		return
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
@@ -50,12 +51,14 @@ func _on_toottally_request_completed(_result, response_code, _headers, body):
 		calc_contents.text = "[center]\n\n\n[font_size=25]Failed to process chart![/font_size]\n\n{error}".format(data)
 		main.show_popup(diff_calc)
 		disabled = false
+		http_request.queue_free()
 		return
 	data["short_note_hash"] = data['note_hash'].left(6) + ' ... ' + data['note_hash'].right(6)
 	data["short_file_hash"] = data['file_hash'].left(6) + ' ... ' + data['file_hash'].right(6)
 	var big_whole_part = func(value:float,size:int=20,places:int=4) -> String:
 		var format_string : String = "[font_size=%s]%d[/font_size]" % [size,value]
 		format_string += str(value).substr(str(value).find('.'),places + 1)
+		http_request.queue_free()
 		return format_string
 	calc_contents.text = info_template.format(data)
 	calc_contents.text += (diff_template % [
@@ -106,13 +109,14 @@ func _on_toottally_request_completed(_result, response_code, _headers, body):
 	%Chart.assign_tt_note_ids()
 	main.show_popup(diff_calc)
 	disabled = false
+	http_request.queue_free()
 
 
 func _on_toottally_upload_pressed():
 	disabled = true
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
-	http_request.request_completed.connect(_on_toottally_request_completed)
+	http_request.request_completed.connect(_on_toottally_request_completed.bind(http_request))
 	var tmb_data = main.tmb.to_dict()
 	var errors = []
 	for key in tmb_data.keys():
@@ -128,6 +132,7 @@ func _on_toottally_upload_pressed():
 			calc_contents.text += "\n" + e
 		main.show_popup(diff_calc)
 		disabled = false
+		http_request.queue_free()
 		return
 	var chart_data = JSON.stringify(tmb_data)
 	var dict = {"tmb": chart_data, "skip_save": true}
