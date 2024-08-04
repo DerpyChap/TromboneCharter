@@ -56,6 +56,16 @@ focus_mode = 1
 mouse_default_cursor_shape = 15
 texture_normal = ExtResource("3_qch4g")
 
+[node name="EventName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 194.0
+offset_right = 159.0
+offset_bottom = 209.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.627451)
+theme_override_font_sizes/font_size = 10
+
 [connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]
 [connection signal="focus_entered" from="SpinBox" to="." method="_on_line_edit_focus_entered"]
 [connection signal="gui_input" from="SpinBox" to="." method="_on_spin_box_gui_input"]
