@@ -56,11 +56,6 @@ func _on_chart_loaded():
     move_to_front()
     %PlayheadHandle.move_to_front()
 
-func _on_show_events_toggled(button_pressed):
-    move_to_front()
-    %PlayheadHandle.move_to_front()
-    set_visible(button_pressed)
-
 func _gui_input(event):
     if Input.is_key_pressed(KEY_SHIFT):
         %Chart.update_playhead(event)
@@ -70,7 +65,37 @@ func _gui_input(event):
     if event.double_click:
         var bar = %Chart.x_to_bar(event.position.x)
         if %Settings.snap_time: bar = snapped(bar, chart.current_subdiv)
-        var new_event = _add_event(bar,0)
+        var event_id = 0
+        if Global.EVENTS_EDITOR_MODE == 1 && event.button_index == MOUSE_BUTTON_LEFT:
+            event_id = -100
+        elif Global.EVENTS_EDITOR_MODE == 1 && event.button_index == MOUSE_BUTTON_RIGHT:
+            event_id = -101
+        var new_event = _add_event(bar,event_id)
         new_event.spin_box.get_line_edit().grab_focus()
     elif !event.is_released():
         viewport.gui_release_focus()
+
+
+func _on_option_button_item_selected(index:int) -> void:
+    if index == Global.EVENTS_EDITOR_MODE:
+        return
+    
+    Global.EVENTS_EDITOR_MODE = index
+    match index:
+        0:
+            set_visible(false)
+        1:
+            move_to_front()
+            %PlayheadHandle.move_to_front()
+            for event in get_children():
+                if event.id in [-100, -101]:
+                    event.set_visible(true)
+                else:
+                    event.set_visible(false)
+            set_visible(true)
+        2:
+            move_to_front()
+            %PlayheadHandle.move_to_front()
+            for event in get_children():
+                event.set_visible(true)
+            set_visible(true)

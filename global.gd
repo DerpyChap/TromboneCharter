@@ -1,6 +1,7 @@
 extends Node
 
 signal tmb_updated
+signal events_mode_changed(value)
 const SEMITONE := 13.75
 const TWELFTH_ROOT_2 : float = pow( 2, (1.0 / 12.0) )
 # mainly significant for updates to Ogg loading
@@ -22,6 +23,11 @@ const NUM_KEYS = 27
 var settings : Settings
 func beat_to_time(beat:float) -> float: return beat / (working_tmb.tempo / 60.0)
 func time_to_beat(time:float) -> float: return time * (60.0 / working_tmb.tempo)
+
+var EVENTS_EDITOR_MODE : int:
+	set(value):
+		EVENTS_EDITOR_MODE = value
+		emit_signal("events_mode_changed",value)
 
 # shamelessly copied from wikiped https://en.wikipedia.org/wiki/Smoothstep#Variations
 static func smootherstep(from:float, to:float, x:float) -> float:

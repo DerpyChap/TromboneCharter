@@ -627,7 +627,7 @@ script = ExtResource("10_14v0o")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/v_separation = 1
+theme_override_constants/v_separation = 0
 
 [node name="ZoomEntry" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings"]
 layout_mode = 2
@@ -690,15 +690,26 @@ alignment = 2
 prefix = "Pitch snap: 1/"
 suffix = "semitones"
 
+[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/EditSettings"]
+layout_mode = 2
+text = "Background events visibility:"
+
+[node name="EventsMode" type="OptionButton" parent="Settings/MarginC/HBoxC/EditSettings"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Lane Switches"
+popup/item_1/id = 1
+popup/item_2/text = "All Events"
+popup/item_2/id = 2
+
 [node name="DrawMicrotones" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Draw Microtones"
-
-[node name="ShowEvents" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Show event editor"
 
 [node name="InsertTapNotes" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
 unique_name_in_owner = true
@@ -1000,8 +1011,8 @@ text = "toot toot lol"
 [connection signal="toggled" from="Settings/MarginC/HBoxC/EditSettings/TimeSnapping/TimeSnapChk" to="Settings" method="_on_time_snap_toggled"]
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/EditSettings/TimeSnapping/TimingSnap" to="Settings" method="_on_timing_snap_value_changed"]
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/EditSettings/PitchSnapping/PitchSnap" to="PianoRoll/ChartView" method="_on_pitch_snap_value_changed"]
+[connection signal="item_selected" from="Settings/MarginC/HBoxC/EditSettings/EventsMode" to="PianoRoll/ChartView/Chart/EventsEditor" method="_on_option_button_item_selected"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/DrawMicrotones" to="PianoRoll/ChartView" method="queue_redraw"]
-[connection signal="toggled" from="Settings/MarginC/HBoxC/EditSettings/ShowEvents" to="PianoRoll/ChartView/Chart/EventsEditor" method="_on_show_events_toggled"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/InsertTapNotes" to="PianoRoll/ChartView" method="queue_redraw"]
 [connection signal="toggled" from="Settings/MarginC/HBoxC/EditSettings/DootToggle" to="PianoRoll/ChartView/Chart" method="_on_doot_toggle_toggled"]
 [connection signal="toggled" from="Settings/MarginC/HBoxC/EditSettings/PropagateChanges" to="PianoRoll/ChartView/Chart" method="_on_show_targets_toggled"]
