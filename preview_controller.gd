@@ -60,7 +60,7 @@ func _do_preview():
 			metronome.play()
 		last_position = song_position
 
-		var event = _find_background_event(last_position)
+		var event = _find_background_event(start_beat)
 		if event != null and event != last_event:
 			%EventsAPI.send_event(event[TMBInfo.EVENT_ID])
 			last_event = event
@@ -116,10 +116,11 @@ func _find_note_overlapping_bar(time:float):
 		if time >= note[TMBInfo.NOTE_BAR] && time <= end_bar: return note
 	return []
 
-func _find_background_event(last_position:float):
+func _find_background_event(start_time: float):
 	var final_event = null
 	for event in tmb.bgdata:
 		if song_position < event[TMBInfo.EVENT_BEAT]: break
+		if start_time > event[TMBInfo.EVENT_BEAT]: continue
 		if song_position >= event[TMBInfo.EVENT_BEAT]: final_event = event
 	return final_event
 
