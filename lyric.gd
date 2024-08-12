@@ -43,6 +43,8 @@ func _process(_delta):
 	if !dragging: return
 	if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		dragging = false
+		bar = chart.x_to_bar(position.x)
+		Global.working_tmb.lyrics = editor.package_lyrics()
 		return
 	var pos = chart.get_local_mouse_position()
 	bar = chart.to_snapped(pos).x

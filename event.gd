@@ -59,6 +59,17 @@ func _ready():
 func _on_text_submitted(_text:String):
 	line_edit.release_focus()
 
+func _process(_delta):
+	if !dragging: return
+	if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		dragging = false
+		bar = chart.x_to_bar(position.x)
+		Global.working_tmb.bgdata = editor.package_events()
+		return
+	var pos = chart.get_local_mouse_position()
+	bar = chart.to_snapped(pos).x
+
+
 func _draw():
 	match id:
 		-100:
