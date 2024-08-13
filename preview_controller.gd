@@ -42,7 +42,7 @@ func _do_preview():
 		for note in tmb.notes: arr.append(note[TMBInfo.NOTE_BAR])
 		return arr
 	var note_ons : Array[float] = get_note_ons.call()
-	var last_event = null
+	var last_events = []
 	
 	StreamPlayer.play(startpoint_in_stream)
 	%PreviewButton.text = "Stop"
@@ -60,10 +60,12 @@ func _do_preview():
 			metronome.play()
 		last_position = song_position
 
-		var event = _find_background_event(start_beat)
-		if event != null and event != last_event:
-			%EventsAPI.send_event(event[TMBInfo.EVENT_ID])
-			last_event = event
+		var events = _find_background_event(start_beat)
+		if events:
+			if events != last_events:
+				for event in events:
+					%EventsAPI.send_event(event[TMBInfo.EVENT_ID])
+				last_events = events
 		
 		var note : Array = _find_note_overlapping_bar(song_position)
 		if note.is_empty():
@@ -98,7 +100,7 @@ func _do_preview():
 	StreamPlayer.stop()
 	player.stop()
 
-	last_event = null
+	last_events = []
 	%EventsAPI.stop_all_events()
 
 	if !settings.section_length:
@@ -117,12 +119,20 @@ func _find_note_overlapping_bar(time:float):
 	return []
 
 func _find_background_event(start_time: float):
-	var final_event = null
+	var final_events = []
 	for event in tmb.bgdata:
 		if song_position < event[TMBInfo.EVENT_BEAT]: break
 		if start_time > event[TMBInfo.EVENT_BEAT]: continue
-		if song_position >= event[TMBInfo.EVENT_BEAT]: final_event = event
-	return final_event
+		if song_position >= event[TMBInfo.EVENT_BEAT]:
+			# For overlapping events
+			if final_events:
+				if event[TMBInfo.EVENT_BEAT] == final_events[0][TMBInfo.EVENT_BEAT]:
+					final_events.append(event)
+				else:
+					final_events = [event]
+			else:
+				final_events = [event]
+	return final_events
 
 func _find_matching_by_note_on(note_ons:Array[float],time:float):
 	for i in note_ons.size():
