@@ -44,6 +44,12 @@ func set_label():
 			label.text = "PlayAurora"
 		-21:
 			label.text = "PlaySongColorAurora"
+		-22:
+			label.text = "StopAurora"
+		-30:
+			label.text = "PlayBubbles"
+		-31:
+			label.text = "StopBubbles"
 		_:
 			label.text = ""
 

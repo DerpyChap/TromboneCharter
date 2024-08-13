@@ -236,12 +236,12 @@ text = "OK"
 unique_name_in_owner = true
 title = "Events Previewer"
 position = Vector2i(0, 36)
-size = Vector2i(401, 300)
+size = Vector2i(737, 299)
 visible = false
 unresizable = true
 
 [node name="PanelContainer" type="PanelContainer" parent="EventTester"]
-offset_right = 345.0
+offset_right = 590.0
 offset_bottom = 300.0
 
 [node name="MarginContainer" type="MarginContainer" parent="EventTester/PanelContainer"]
@@ -256,83 +256,114 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="VFlowContainer" type="VFlowContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
 
-[node name="PlayConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="Confetti" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="PlayConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti"]
 layout_mode = 2
 text = "PlayConfetti"
 script = ExtResource("26_0mxbw")
 event_id = -1
 
-[node name="PlaySongColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="PlaySongColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti"]
 layout_mode = 2
 text = "PlaySongColorConfetti"
 script = ExtResource("26_0mxbw")
 event_id = -2
 
-[node name="PlayStartColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="PlayStartColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti"]
 layout_mode = 2
 text = "PlayStartColorConfetti"
 script = ExtResource("26_0mxbw")
 event_id = -3
 
-[node name="PlayEndColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="PlayEndColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti"]
 layout_mode = 2
 text = "PlayEndColorConfetti"
 script = ExtResource("26_0mxbw")
 event_id = -4
 
-[node name="PlayFireworks" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="Fireworks" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="PlayFireworks" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
 layout_mode = 2
 text = "PlayFireworks"
 script = ExtResource("26_0mxbw")
 event_id = -10
 
-[node name="PlayFireworkComet" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="PlayFireworkComet" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
 layout_mode = 2
 text = "PlayFireworkComet"
 script = ExtResource("26_0mxbw")
 event_id = -11
 
-[node name="PlayFireworkPion" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="PlayFireworkPion" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
 layout_mode = 2
 text = "PlayFireworkPion"
 script = ExtResource("26_0mxbw")
 event_id = -12
 
-[node name="PlayFireworkPalm" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="PlayFireworkPalm" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
 layout_mode = 2
 text = "PlayFireworkPalm"
 script = ExtResource("26_0mxbw")
 event_id = -13
 
-[node name="PlayFireworkCrossover" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="PlayFireworkCrossover" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
 layout_mode = 2
 text = "PlayFireworkCrossover"
 script = ExtResource("26_0mxbw")
 event_id = -14
 
-[node name="PlayFireworkFlare" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="PlayFireworkFlare" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
 layout_mode = 2
 text = "PlayFireworkFlare"
 script = ExtResource("26_0mxbw")
 event_id = -15
 
-[node name="PlayAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="Aurora" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="PlayAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Aurora"]
 layout_mode = 2
 text = "PlayAurora"
 script = ExtResource("26_0mxbw")
 event_id = -20
 
-[node name="PlaySongColorAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="PlaySongColorAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Aurora"]
 layout_mode = 2
 text = "PlaySongColorAurora"
 script = ExtResource("26_0mxbw")
 event_id = -21
+
+[node name="StopAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Aurora"]
+layout_mode = 2
+text = "StopAurora"
+script = ExtResource("26_0mxbw")
+event_id = -22
+
+[node name="Bubbles" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="PlayBubbles" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Bubbles"]
+layout_mode = 2
+text = "PlayBubbles"
+script = ExtResource("26_0mxbw")
+event_id = -30
+
+[node name="StopBubbles" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Bubbles"]
+layout_mode = 2
+text = "StopBubbles"
+script = ExtResource("26_0mxbw")
+event_id = -31
 
 [node name="StopEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
