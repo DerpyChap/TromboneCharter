@@ -236,7 +236,7 @@ text = "OK"
 unique_name_in_owner = true
 title = "Events Previewer"
 position = Vector2i(0, 36)
-size = Vector2i(737, 299)
+size = Vector2i(737, 386)
 visible = false
 unresizable = true
 
@@ -364,6 +364,12 @@ layout_mode = 2
 text = "StopBubbles"
 script = ExtResource("26_0mxbw")
 event_id = -31
+
+[node name="RichTextLabel" type="RichTextLabel" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Flat events:
+TopLightFlashOne (50), TopLightFlashAll (51), BottomLightFlashOne (52), BottomLightFlashAll (53), DarkenRoom (54), SoloLight (55), FadeoutWhite (56), FadeoutBlack (57), StartConfetti (58), TempoFreeMode (59)"
+fit_content = true
 
 [node name="StopEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -728,10 +734,9 @@ text = "Background events visibility:"
 [node name="EventsMode" type="OptionButton" parent="Settings/MarginC/HBoxC/EditSettings"]
 unique_name_in_owner = true
 layout_mode = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "None"
-popup/item_0/id = 0
 popup/item_1/text = "Lane Switches"
 popup/item_1/id = 1
 popup/item_2/text = "All Events"
@@ -800,10 +805,9 @@ text = "Audio preview type:"
 [node name="PreviewType" type="OptionButton" parent="Settings/MarginC/HBoxC/EditSettings"]
 unique_name_in_owner = true
 layout_mode = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Waveform"
-popup/item_0/id = 0
 popup/item_1/text = "Spectrogram"
 popup/item_1/id = 1
 
@@ -973,10 +977,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Next Note"
-popup/item_0/id = 0
 popup/item_1/text = "Next Bar"
 popup/item_1/id = 1
 

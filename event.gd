@@ -20,6 +20,26 @@ var id : int:
 
 func set_label():
 	match id:
+		59:
+			label.text = "TempoFreeMode"
+		58:
+			label.text = "StartConfetti"
+		57:
+			label.text = "FadeoutBlack"
+		56:
+			label.text = "FadeoutWhite"
+		55:
+			label.text = "SoloLight"
+		54:
+			label.text = "DarkenRoom"
+		53:
+			label.text = "BottomLightFlashAll"
+		52:
+			label.text = "BottomLightFlashOne"
+		51:
+			label.text = "TopLightFlashAll"
+		50:
+			label.text = "TopLightFlashOne"
 		-1:
 			label.text = "PlayConfetti"
 		-2:
