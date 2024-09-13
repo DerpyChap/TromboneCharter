@@ -79,8 +79,6 @@ func _gui_input(event):
 
 func _on_option_button_item_selected(index:int) -> void:
     match index:
-        0:
-            set_visible(false)
         1:
             move_to_front()
             %PlayheadHandle.move_to_front()
@@ -96,3 +94,5 @@ func _on_option_button_item_selected(index:int) -> void:
             for event in get_children():
                 event.set_visible(true)
             set_visible(true)
+        _:
+            set_visible(false)

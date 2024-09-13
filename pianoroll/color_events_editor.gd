@@ -21,7 +21,6 @@ func package_events() -> Array:
     var result := []
     for event : ColorEvent in get_children():
         if !(event is ColorEvent) || event.is_queued_for_deletion(): continue
-        print(event.color)
         var data := [event.id, Global.beat_to_time(event.bar), event.duration, event.color.r, event.color.g, event.color.b, event.color.a]
         result.append(data)
     result.sort_custom(func(a, b): return (a[1] < b[1]))
@@ -36,21 +35,18 @@ func _refresh_events():
             child.queue_free()
     
     for event in Global.working_tmb.color_events:
-        print(event)
-        print(Global.time_to_beat(event[1]))
         var color = Color(event[3], event[4], event[5], event[6])
         _add_event(Global.time_to_beat(event[1]),event[0], color, event[2])
     
     _update_events()
 
 func _on_events_mode_item_selected(mode: int) -> void:
-    print("item selected")
-    print(mode)
     if mode == Global.EVENTS_EDITOR_MODE:
         return
     match mode:
         3:
-            print("setting visible")
+            move_to_front()
+            %PlayheadHandle.move_to_front()
             set_visible(true)
         _:
             set_visible(false)

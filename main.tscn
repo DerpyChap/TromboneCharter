@@ -1029,6 +1029,7 @@ text = "toot toot lol"
 
 [connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/LyricsEditor" method="_on_chart_loaded"]
 [connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/EventsEditor" method="_on_chart_loaded"]
+[connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/ColorEventsEditor" method="_on_chart_loaded"]
 [connection signal="confirmed" from="NewChartConfirm" to="." method="_on_new_chart_confirmed"]
 [connection signal="confirmed" from="CopyConfirm" to="CopyConfirm" method="_on_copy_confirmed"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]
