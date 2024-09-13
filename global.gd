@@ -22,7 +22,7 @@ const NUM_KEYS = 27
 @onready var ffmpeg_worker = FFmpegWorker.new(self)
 var settings : Settings
 func beat_to_time(beat:float) -> float: return beat / (working_tmb.tempo / 60.0)
-func time_to_beat(time:float) -> float: return time * (60.0 / working_tmb.tempo)
+func time_to_beat(time:float) -> float: return time * (working_tmb.tempo / 60.0)
 
 var EVENTS_EDITOR_MODE : int:
 	set(value):
