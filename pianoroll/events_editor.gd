@@ -1,3 +1,4 @@
+class_name EventsEditor
 extends Control
 
 
@@ -77,10 +78,6 @@ func _gui_input(event):
 
 
 func _on_option_button_item_selected(index:int) -> void:
-    if index == Global.EVENTS_EDITOR_MODE:
-        return
-    
-    Global.EVENTS_EDITOR_MODE = index
     match index:
         0:
             set_visible(false)

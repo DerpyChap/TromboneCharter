@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dqnjrk008ccpy"]
+[gd_scene load_steps=31 format=3 uid="uid://dqnjrk008ccpy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_4hx5p"]
 [ext_resource type="Script" path="res://save_load.gd" id="2_37xub"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://ca0siccuqmqat" path="res://resetbutton-thick.svg" id="14_8wa4s"]
 [ext_resource type="Script" path="res://alert.gd" id="16_yl2q4"]
 [ext_resource type="Script" path="res://pianoroll/events_editor.gd" id="17_baaho"]
+[ext_resource type="Script" path="res://pianoroll/color_events_editor.gd" id="20_i1tk0"]
 [ext_resource type="Script" path="res://event_button.gd" id="26_0mxbw"]
 [ext_resource type="Script" path="res://events_api.gd" id="27_trcdr"]
 
@@ -472,6 +473,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("17_baaho")
 
+[node name="ColorEventsEditor" type="Control" parent="PianoRoll/ChartView/Chart"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("20_i1tk0")
+
 [node name="PlayheadHandle" type="Control" parent="PianoRoll/ChartView/Chart"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -735,12 +747,14 @@ text = "Background events visibility:"
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
-item_count = 3
+item_count = 4
 popup/item_0/text = "None"
 popup/item_1/text = "Lane Switches"
 popup/item_1/id = 1
-popup/item_2/text = "All Events"
+popup/item_2/text = "Background Events"
 popup/item_2/id = 2
+popup/item_3/text = "Color Events"
+popup/item_3/id = 3
 
 [node name="DrawMicrotones" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
 unique_name_in_owner = true
@@ -1046,6 +1060,7 @@ text = "toot toot lol"
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/EditSettings/TimeSnapping/TimingSnap" to="Settings" method="_on_timing_snap_value_changed"]
 [connection signal="value_changed" from="Settings/MarginC/HBoxC/EditSettings/PitchSnapping/PitchSnap" to="PianoRoll/ChartView" method="_on_pitch_snap_value_changed"]
 [connection signal="item_selected" from="Settings/MarginC/HBoxC/EditSettings/EventsMode" to="PianoRoll/ChartView/Chart/EventsEditor" method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Settings/MarginC/HBoxC/EditSettings/EventsMode" to="PianoRoll/ChartView/Chart/ColorEventsEditor" method="_on_events_mode_item_selected"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/DrawMicrotones" to="PianoRoll/ChartView" method="queue_redraw"]
 [connection signal="pressed" from="Settings/MarginC/HBoxC/EditSettings/InsertTapNotes" to="PianoRoll/ChartView" method="queue_redraw"]
 [connection signal="toggled" from="Settings/MarginC/HBoxC/EditSettings/DootToggle" to="PianoRoll/ChartView/Chart" method="_on_doot_toggle_toggled"]

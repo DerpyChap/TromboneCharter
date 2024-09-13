@@ -1,0 +1,135 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn85m0jkg5u2q"]
+
+[ext_resource type="Script" path="res://color_event.gd" id="1_pagf7"]
+[ext_resource type="Texture2D" uid="uid://bf23fo001m0n4" path="res://trashcan.svg" id="2_10jd8"]
+[ext_resource type="Texture2D" uid="uid://cu0ygufwrvrfu" path="res://draghandle.svg" id="3_utvw4"]
+
+[node name="ColorEvent" type="Control"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+script = ExtResource("1_pagf7")
+
+[node name="DeleteButton" type="Button" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+focus_mode = 1
+icon = ExtResource("2_10jd8")
+
+[node name="Tags" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="ID" type="Label" parent="Tags"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 150.0
+offset_right = 82.0
+offset_bottom = 165.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.627451)
+theme_override_font_sizes/font_size = 10
+text = "ID"
+
+[node name="Color" type="Label" parent="Tags"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 150.0
+offset_right = 118.0
+offset_bottom = 165.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.627451)
+theme_override_font_sizes/font_size = 10
+text = "Color
+"
+
+[node name="Duration" type="Label" parent="Tags"]
+layout_mode = 0
+offset_left = 128.255
+offset_top = 150.0
+offset_right = 171.255
+offset_bottom = 165.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.627451)
+theme_override_font_sizes/font_size = 10
+text = "Duration"
+
+[node name="SpinBox" type="SpinBox" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_top = 164.0
+offset_right = 83.0625
+offset_bottom = 195.0
+min_value = -1e+12
+max_value = 1e+12
+rounded = true
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+select_all_on_focus = true
+
+[node name="Duration" type="SpinBox" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 128.0
+offset_top = 164.0
+offset_right = 211.063
+offset_bottom = 195.0
+max_value = 1e+12
+step = 0.0
+allow_greater = true
+alignment = 2
+custom_arrow_step = 1.0
+select_all_on_focus = true
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
+layout_mode = 0
+offset_left = 88.3
+offset_top = 164.0
+offset_right = 119.3
+offset_bottom = 195.0
+
+[node name="LineEdit" type="LineEdit" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_bottom = 0.75
+offset_top = -285.0
+offset_right = 67.0625
+offset_bottom = -254.0
+grow_vertical = 2
+expand_to_text_length = true
+
+[node name="DragHandle" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -3.0
+offset_top = 90.0
+offset_right = 5.0
+offset_bottom = 114.0
+grow_vertical = 2
+focus_mode = 1
+mouse_default_cursor_shape = 15
+texture_normal = ExtResource("3_utvw4")
+
+[node name="EventName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 194.0
+offset_right = 34.0
+offset_bottom = 209.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.627451)
+theme_override_font_sizes/font_size = 10
+
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]
+[connection signal="value_changed" from="Duration" to="." method="_on_duration_value_changed"]
+[connection signal="popup_closed" from="ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
+[connection signal="ready" from="ColorPickerButton" to="." method="_on_color_picker_button_ready"]
+[connection signal="focus_entered" from="LineEdit" to="." method="_on_line_edit_focus_entered"]
+[connection signal="gui_input" from="LineEdit" to="." method="_on_line_edit_gui_input"]
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="gui_input" from="DragHandle" to="." method="_on_drag_handle_gui_input"]

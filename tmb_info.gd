@@ -24,6 +24,7 @@ var notes := []
 var lyrics := []
 var improv_zones := []
 var bgdata := []
+var color_events := []
 var title		:= ""
 var shortName	:= ""
 var author		:= ""
@@ -133,6 +134,10 @@ func load_from_file(filename:String) -> int:
 		improv_zones = data.improv_zones
 	else:
 		improv_zones = []
+	if data.has('color_events'):
+		color_events = data.color_events
+	else:
+		color_events = []
 	
 	if data.has("note_color_start"):
 		Global.settings.use_custom_colors = true
@@ -177,6 +182,7 @@ func to_dict() -> Dictionary:
 	dict["lyrics"] = lyrics
 	dict["improv_zones"] = improv_zones
 	dict["bgdata"] = bgdata
+	dict["color_events"] = color_events
 	dict["UNK1"] = 0
 	
 	if Global.settings.use_custom_colors:
