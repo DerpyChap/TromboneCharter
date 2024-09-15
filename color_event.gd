@@ -1,14 +1,21 @@
 class_name ColorEvent
 extends BGEvent
 
-@onready var _color_picker : ColorPickerButton = $ColorPickerButton
-@onready var _duration_spinbox : SpinBox = $Duration
+@onready var _color_picker : ColorPickerButton = $UI/ColorPickerButton
+@onready var _duration_spinbox : SpinBox = $UI/Duration
+@onready var _ui : Control = $UI
 @onready var color : Color:
     set(value):
         color = value
         if _color_picker:
             _color_picker.color = value
 @onready var color_editor : ColorEventsEditor = get_parent()
+
+var pitch : float:
+    set(value):
+        pitch = value
+        if _ui && chart:
+            _ui.position.y = chart.pitch_to_height(value)
 
 @onready var duration : float:
     set(value):
@@ -44,8 +51,11 @@ func _process(_delta):
         bar = chart.x_to_bar(position.x)
         Global.working_tmb.color_events = color_editor.package_events()
         return
-    var pos = chart.get_local_mouse_position()
-    bar = chart.to_snapped(pos).x
+    var pos = chart.get_local_mouse_position() - Vector2(0, 20)
+    var snapped_pos = chart.to_snapped(pos)
+    print("%s %s" % [pos, snapped_pos])
+    bar = snapped_pos.x
+    pitch = snapped_pos.y
 
 func _draw():
     draw_polyline_colors([Vector2.ZERO,Vector2(0, size.y)],
@@ -64,7 +74,7 @@ func _on_spin_box_value_changed(new_id):
         queue_redraw()
 
 func _on_color_picker_button_ready() -> void:
-    $ColorPickerButton.color = color
+    $UI/ColorPickerButton.color = color
 
 func _on_color_picker_button_popup_closed() -> void: 
     if _color_picker.color != color:

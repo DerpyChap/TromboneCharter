@@ -19,6 +19,7 @@ focus_mode = 1
 icon = ExtResource("2_v4asq")
 
 [node name="SpinBox" type="SpinBox" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 offset_top = 164.0
@@ -45,6 +46,7 @@ mouse_default_cursor_shape = 15
 texture_normal = ExtResource("3_qch4g")
 
 [node name="EventName" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 2.0
 offset_top = 194.0

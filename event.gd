@@ -1,8 +1,8 @@
 class_name BGEvent
 extends Lyric
 
-@onready var spin_box : SpinBox = $SpinBox
-@onready var label : Label = $EventName
+@onready var spin_box : SpinBox = %SpinBox
+@onready var label : Label = %EventName
 
 var id : int:
     set(value):
