@@ -92,6 +92,10 @@ func _on_duration_value_changed(value: float) -> void:
         duration = value
         Global.working_tmb.color_events = color_editor.package_events()
 
+func _on_focus_entered() -> void:
+    print("moving to front")
+    move_to_front()
+
 func _notification(what):
     match what:
         NOTIFICATION_RESIZED:
