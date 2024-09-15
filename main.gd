@@ -153,6 +153,7 @@ func _on_save_dialog_file_selected(path:String) -> void:
 		return
 	
 	var dir = path.substr(0,path.rfind("/"))
+	if dir == path: dir = path.substr(0,path.rfind("\\"))
 	cfg.set_value("Config", "saved_dir", dir)
 	try_cfg_save()
 	

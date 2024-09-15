@@ -63,7 +63,6 @@ func _do_preview():
 		if int(last_position) != int(song_position) && %MetroChk.button_pressed:
 			metronome.play()
 		last_position = song_position
-		print(Global.beat_to_time(song_position))
 
 		var events = _find_background_event(start_beat)
 		if events:
