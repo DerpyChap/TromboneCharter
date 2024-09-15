@@ -237,8 +237,7 @@ text = "OK"
 unique_name_in_owner = true
 title = "Events Previewer"
 position = Vector2i(0, 36)
-size = Vector2i(737, 386)
-visible = false
+size = Vector2i(737, 451)
 unresizable = true
 
 [node name="PanelContainer" type="PanelContainer" parent="EventTester"]
@@ -372,10 +371,61 @@ text = "Flat events:
 TopLightFlashOne (50), TopLightFlashAll (51), BottomLightFlashOne (52), BottomLightFlashAll (53), DarkenRoom (54), SoloLight (55), FadeoutWhite (56), FadeoutBlack (57), StartConfetti (58), TempoFreeMode (59)"
 fit_content = true
 
-[node name="StopEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SendColorEvent" type="OptionButton" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 8
+popup/item_0/text = "FarLeftLight"
+popup/item_1/text = "MidLeftLight"
+popup/item_1/id = 1
+popup/item_2/text = "MidRightLight"
+popup/item_2/id = 2
+popup/item_3/text = "FarRightLight"
+popup/item_3/id = 3
+popup/item_4/text = "FarLeftFloorLight"
+popup/item_4/id = 10
+popup/item_5/text = "MidLeftFloorLight"
+popup/item_5/id = 11
+popup/item_6/text = "MidRightFloorLight"
+popup/item_6/id = 12
+popup/item_7/text = "FarRightFloorLight"
+popup/item_7/id = 13
+
+[node name="ColorEventPicker" type="ColorPickerButton" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="ColorEventDuration" type="SpinBox" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1e+10
+step = 0.0
+allow_greater = true
+allow_lesser = true
+suffix = "s"
+custom_arrow_step = 1.0
+
+[node name="Button" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Send Color Event"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StopEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Stop All Events"
+text = "Stop Background Events"
+
+[node name="StopColorEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Stop Color Events"
 
 [node name="PianoRoll" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(360, 270)
@@ -1043,7 +1093,9 @@ text = "toot toot lol"
 [connection signal="meta_clicked" from="DiffCalc/PanelContainer/VBoxContainer/PanelContainer/CalcInfo" to="." method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="DiffCalc/PanelContainer/VBoxContainer/Button" to="." method="_on_diff_ok_button_pressed"]
 [connection signal="close_requested" from="EventTester" to="EventsAPI" method="_on_event_window_close_requested"]
-[connection signal="pressed" from="EventTester/PanelContainer/MarginContainer/VBoxContainer/StopEvents" to="EventsAPI" method="_on_stop_events_pressed"]
+[connection signal="pressed" from="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Button" to="EventsAPI" method="_on_color_event_pressed"]
+[connection signal="pressed" from="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/StopEvents" to="EventsAPI" method="_on_stop_events_pressed"]
+[connection signal="pressed" from="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/StopColorEvents" to="EventsAPI" method="_on_stop_color_events_pressed"]
 [connection signal="pressed" from="PianoRoll/Piano/Button" to="PianoRoll/Piano" method="_on_button_pressed"]
 [connection signal="mouse_entered" from="PianoRoll/ChartView/Chart" to="PianoRoll/ChartView/Chart" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PianoRoll/ChartView/Chart" to="PianoRoll/ChartView/Chart" method="_on_mouse_exited"]

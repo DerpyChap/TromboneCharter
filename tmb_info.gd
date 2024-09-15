@@ -184,6 +184,7 @@ func save_to_file(filename : String) -> int:
 	print(color_event_pos)
 	print("finished saving")
 
+	# TODO: save this data as custom data in the new TMB format
 	if color_event_pos:
 		var m = FileAccess.open(filename + ".chartermeta",FileAccess.WRITE)
 		if m == null:
