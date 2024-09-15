@@ -23,6 +23,9 @@ var pitch : float:
         if _duration_spinbox:
             _duration_spinbox.value = value
 
+func _color_event_ready():
+    _ui.position.y = chart.pitch_to_height(pitch)
+
 func set_label():
     match id:
         0:
@@ -50,12 +53,12 @@ func _process(_delta):
         dragging = false
         bar = chart.x_to_bar(position.x)
         Global.working_tmb.color_events = color_editor.package_events()
+        Global.working_tmb.color_event_pos = color_editor.package_event_pos()
         return
     var pos = chart.get_local_mouse_position() - Vector2(0, 20)
     var snapped_pos = chart.to_snapped(pos)
-    print("%s %s" % [pos, snapped_pos])
     bar = snapped_pos.x
-    pitch = snapped_pos.y
+    pitch = clamp(snapped_pos.y, -165, 178.75)
 
 func _draw():
     draw_polyline_colors([Vector2.ZERO,Vector2(0, size.y)],
@@ -65,6 +68,7 @@ func _draw():
 func _on_delete_button_pressed():
     queue_free()
     Global.working_tmb.color_events = color_editor.package_events()
+    Global.working_tmb.color_event_pos = color_editor.package_event_pos()
     color_editor._refresh_events()
 
 func _on_spin_box_value_changed(new_id):
@@ -86,3 +90,9 @@ func _on_duration_value_changed(value: float) -> void:
     if duration != value:
         duration = value
         Global.working_tmb.color_events = color_editor.package_events()
+
+func _notification(what):
+    match what:
+        NOTIFICATION_RESIZED:
+            if _ui:
+                _ui.position.y = chart.pitch_to_height(pitch)

@@ -7,14 +7,16 @@ extends EventsEditor
 func _ready():
     Global.tmb_updated.connect(_on_tmb_update)
 
-func _add_event(bar:float,id:int,color:Color = last_color, duration: float = 0):
+func _add_event(bar:float,id:int,color:Color = last_color, duration: float = 0, pitch = 137.5):
     var new_event = color_event_scn.instantiate()
     new_event.id = id
     new_event.bar = bar
     new_event.color = color
     new_event.duration = duration
+    new_event.pitch = pitch
     add_child(new_event)
     Global.working_tmb.color_events = package_events()
+    Global.working_tmb.color_event_pos = package_event_pos()
     return new_event
 
 func package_events() -> Array:
@@ -26,6 +28,18 @@ func package_events() -> Array:
     result.sort_custom(func(a, b): return (a[1] < b[1]))
     return result
 
+func package_event_pos() -> Array:
+    var result := []
+    for event : ColorEvent in get_children():
+        if !(event is ColorEvent) || event.is_queued_for_deletion(): continue
+        var data := [event.pitch, event.bar]
+        result.append(data)
+    result.sort_custom(func(a, b): return (a[1] < b[1]))
+    var results_filtered := []
+    for r in result:
+        results_filtered.append(r[0])
+    return results_filtered
+
 func _refresh_events():
     var children = get_children()
     
@@ -34,9 +48,22 @@ func _refresh_events():
         if child is ColorEvent && !child.is_queued_for_deletion():
             child.queue_free()
     
-    for event in Global.working_tmb.color_events:
+    var color_events = Global.working_tmb.color_events
+    var color_event_pos = Global.working_tmb.color_event_pos
+    print('color events:')
+    print(color_event_pos)
+    var pitch_max = len(color_event_pos)
+    var count = len(color_events)
+
+    for i in range(count):
+        var event = color_events[i]
+        var pitch = 137.5
+        if i <= pitch_max && pitch_max:
+            pitch = color_event_pos[i]
+        print(pitch)
         var color = Color(event[3], event[4], event[5], event[6])
-        _add_event(Global.time_to_beat(event[1]),event[0], color, event[2])
+        _add_event(Global.time_to_beat(event[1]),event[0], color, event[2], pitch)
+        
     
     _update_events()
 

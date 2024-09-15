@@ -38,6 +38,8 @@ var timesig 	: int = 2
 var difficulty	: int = 5
 var savednotespacing : int = 120
 
+var color_event_pos := []
+
 
 func has_note_touching_endpoint() -> bool:
 	if notes.is_empty(): return false
@@ -152,6 +154,20 @@ func load_from_file(filename:String) -> int:
 			data["note_color_end"][2]
 		)
 	
+	var m = FileAccess.open(filename + ".chartermeta",FileAccess.READ)
+	if m:
+		var meta_err = m.get_open_error()
+		if meta_err:
+			color_event_pos = []
+		else:
+			var metajson = JSON.new()
+			err = metajson.parse(m.get_as_text())
+			var metadata = metajson.data
+			if typeof(metadata) != TYPE_DICTIONARY:
+				color_event_pos = []
+			else:
+				color_event_pos = metadata.color_pos
+	
 	return LoadResult.SUCCESS
 
 
@@ -165,7 +181,19 @@ func save_to_file(filename : String) -> int:
 	
 	var dict := to_dict()
 	f.store_string(JSON.stringify(dict))
+	print(color_event_pos)
 	print("finished saving")
+
+	if color_event_pos:
+		var m = FileAccess.open(filename + ".chartermeta",FileAccess.WRITE)
+		if m == null:
+			var err = FileAccess.get_open_error()
+			print(error_string(err))
+		else:
+			var metadict := {}
+			metadict["color_pos"] = color_event_pos
+			m.store_string(JSON.stringify(metadict))
+			print("finished saving charter metadata")
 	return OK
 
 func to_dict() -> Dictionary:
