@@ -23,9 +23,17 @@ func package_events() -> Array:
     var result := []
     for event : ColorEvent in get_children():
         if !(event is ColorEvent) || event.is_queued_for_deletion(): continue
-        var data := [event.id, Global.beat_to_time(event.bar), event.duration, event.color.r, event.color.g, event.color.b, event.color.a]
+        var data := {
+            "id": event.id,
+            "time": Global.beat_to_time(event.bar),
+            "duration": event.duration,
+            "r": event.color.r,
+            "g": event.color.g,
+            "b": event.color.b,
+            "a": event.color.a
+        }
         result.append(data)
-    result.sort_custom(func(a, b): return (a[1] < b[1]))
+    result.sort_custom(func(a, b): return (a["time"] < b["time"]))
     return result
 
 func package_event_pos() -> Array:
@@ -61,9 +69,8 @@ func _refresh_events():
         if i <= pitch_max && pitch_max:
             pitch = color_event_pos[i]
         print(pitch)
-        var color = Color(event[3], event[4], event[5], event[6])
-        _add_event(Global.time_to_beat(event[1]),event[0], color, event[2], pitch)
-        
+        var color = Color(event["r"], event["g"], event["b"], event["a"])
+        _add_event(Global.time_to_beat(event["time"]),event["id"], color, event["duration"], pitch)
     
     _update_events()
 

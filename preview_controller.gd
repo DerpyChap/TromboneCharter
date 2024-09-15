@@ -63,6 +63,7 @@ func _do_preview():
 		if int(last_position) != int(song_position) && %MetroChk.button_pressed:
 			metronome.play()
 		last_position = song_position
+		print(Global.beat_to_time(song_position))
 
 		var events = _find_background_event(start_beat)
 		if events:
@@ -71,12 +72,12 @@ func _do_preview():
 					%EventsAPI.send_event(event[TMBInfo.EVENT_ID])
 				last_events = events
 		
-		var color_events = _find_color_event(startpoint_in_stream)
+		var color_events = _find_color_event(start_beat)
 		if color_events:
 			if color_events != last_color_events:
 				for event in color_events:
-					var color = Color(event[3], event[4], event[5], event[6])
-					%EventsAPI.send_color_event(event[0], event[1], event[2], color)
+					var color = Color(event["r"], event["g"], event["b"], event["a"])
+					%EventsAPI.send_color_event(event["id"], event["time"], event["duration"], color)
 				last_color_events = color_events
 
 		
@@ -153,12 +154,12 @@ func _find_color_event(start_time: float):
 	var final_events = []
 	var song_pos = Global.beat_to_time(song_position)
 	for event in tmb.color_events:
-		if song_pos < event[1]: break
-		if start_time > event[1]: continue
-		if song_pos >= event[1]:
+		if song_pos < event["time"]: break
+		if start_time > event["time"]: continue
+		if song_pos >= event["time"]:
 			# For overlapping events
 			if final_events:
-				if event[1] == final_events[0][1]:
+				if event["time"] == final_events[0]["time"]:
 					final_events.append(event)
 				else:
 					final_events = [event]

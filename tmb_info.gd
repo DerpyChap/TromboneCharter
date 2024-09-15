@@ -180,7 +180,8 @@ func save_to_file(filename : String) -> int:
 		return err
 	
 	var dict := to_dict()
-	f.store_string(JSON.stringify(dict))
+	# gdscript doesn't support keyword parameters 👎
+	f.store_string(JSON.stringify(dict, "", false))
 	print(color_event_pos)
 	print("finished saving")
 
