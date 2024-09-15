@@ -25,6 +25,7 @@ var pitch : float:
 
 func _color_event_ready():
     _ui.position.y = chart.pitch_to_height(pitch)
+    _duration_spinbox.value = duration
 
 func set_label():
     match id:

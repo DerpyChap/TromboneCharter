@@ -238,6 +238,7 @@ unique_name_in_owner = true
 title = "Events Previewer"
 position = Vector2i(0, 36)
 size = Vector2i(737, 451)
+visible = false
 unresizable = true
 
 [node name="PanelContainer" type="PanelContainer" parent="EventTester"]

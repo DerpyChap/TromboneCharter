@@ -8,7 +8,6 @@ extends Node
 @onready var color_event_duration : SpinBox = %ColorEventDuration
 
 func _on_request_completed(_result, _response_code, _headers, _body, http_request):
-    print(_response_code)
     http_request.queue_free()
 
 func send_event(id: int):
@@ -23,7 +22,6 @@ func send_color_event(id: int, time: float, duration: float, color: Color):
     var http_request = HTTPRequest.new()
     add_child(http_request)
     http_request.request_completed.connect(_on_request_completed.bind(http_request))
-    print(color.to_html())
     var url = "http://127.0.0.1:4523/color_event/{id},{time},{duration},{colorhex}".format(
         {
             "id": id,

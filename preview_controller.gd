@@ -8,6 +8,7 @@ extends Node
 @onready var StreamPlayer : AudioStreamPlayer = %TrackPlayer
 var is_playing : bool = false
 var song_position : float = -1.0
+var elapsed_time : float = -1.0
 var tmb : TMBInfo
 
 
@@ -43,12 +44,15 @@ func _do_preview():
 		return arr
 	var note_ons : Array[float] = get_note_ons.call()
 	var last_events = []
-	
+	var last_color_events = []
+
+	%EventsAPI.stop_all_events()
+	%EventsAPI.reset_color_events()
 	StreamPlayer.play(startpoint_in_stream)
 	%PreviewButton.text = "Stop"
 	while is_playing:
 		time = Time.get_ticks_msec() / 1000.0
-		var elapsed_time = time - initial_time
+		elapsed_time = time - initial_time
 		
 		song_position = elapsed_time * (bpm / 60.0) + start_beat
 		if (settings.section_length && song_position > settings.section_start + settings.section_length):
@@ -66,6 +70,15 @@ func _do_preview():
 				for event in events:
 					%EventsAPI.send_event(event[TMBInfo.EVENT_ID])
 				last_events = events
+		
+		var color_events = _find_color_event(startpoint_in_stream)
+		if color_events:
+			if color_events != last_color_events:
+				for event in color_events:
+					var color = Color(event[3], event[4], event[5], event[6])
+					%EventsAPI.send_color_event(event[0], event[1], event[2], color)
+				last_color_events = color_events
+
 		
 		var note : Array = _find_note_overlapping_bar(song_position)
 		if note.is_empty():
@@ -101,7 +114,9 @@ func _do_preview():
 	player.stop()
 
 	last_events = []
+	last_color_events = []
 	%EventsAPI.stop_all_events()
+	%EventsAPI.reset_color_events()
 
 	if !settings.section_length:
 		settings.playhead_pos = song_position
@@ -127,6 +142,23 @@ func _find_background_event(start_time: float):
 			# For overlapping events
 			if final_events:
 				if event[TMBInfo.EVENT_BEAT] == final_events[0][TMBInfo.EVENT_BEAT]:
+					final_events.append(event)
+				else:
+					final_events = [event]
+			else:
+				final_events = [event]
+	return final_events
+
+func _find_color_event(start_time: float):
+	var final_events = []
+	var song_pos = Global.beat_to_time(song_position)
+	for event in tmb.color_events:
+		if song_pos < event[1]: break
+		if start_time > event[1]: continue
+		if song_pos >= event[1]:
+			# For overlapping events
+			if final_events:
+				if event[1] == final_events[0][1]:
 					final_events.append(event)
 				else:
 					final_events = [event]
