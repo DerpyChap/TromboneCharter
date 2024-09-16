@@ -151,6 +151,7 @@ func _find_background_event(start_time: float):
 
 func _find_color_event(start_time: float):
 	var final_events = []
+	start_time = Global.beat_to_time(start_time)
 	var song_pos = Global.beat_to_time(song_position)
 	for event in tmb.color_events:
 		if song_pos < event["time"]: break
