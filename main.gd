@@ -249,8 +249,10 @@ func _on_paste():
 				Vector2(%ChartView.global_position.x, 10), Alert.LV_ERROR)
 		return
 	match int(data.trombone_charter_data_type):
-		ClipboardType.NOTES, ClipboardType.COLOR_EVENTS:		
+		ClipboardType.NOTES, ClipboardType.COLOR_EVENTS:
 			var copy_target = Global.settings.playhead_pos
+			if Global.settings.snap_time:
+				copy_target = snapped(copy_target, 1.0 / Global.settings.timing_snap)
 
 			$CopyConfirm.set_values(copy_target, data)
 			$CopyConfirm.show()

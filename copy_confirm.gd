@@ -14,11 +14,8 @@ var events_template = """Are you sure you want to paste %s events at beat %s?"""
 func set_values(_target: float, _data: Dictionary):
     target = _target
     data = _data
-    print(data)
-    print(data.trombone_charter_data_type == main.ClipboardType.COLOR_EVENTS)
     # no match statement here because it just... didn't work? might be a weird gdscript bug
     if data.trombone_charter_data_type == main.ClipboardType.COLOR_EVENTS:
-        print("is color event")
         var overwrite_events = main.tmb.find_all_color_events_in_section(target,data.length)
         dialog_text = events_template % [data.count, target]
         if overwrite_events:
@@ -29,7 +26,6 @@ func set_values(_target: float, _data: Dictionary):
             ok_button_text = "OK"
             merge_button.visible = false
     elif data.trombone_charter_data_type == main.ClipboardType.NOTES:
-        print('is notes event')
         ok_button_text = "OK"
         var overwrite_notes = main.tmb.find_all_notes_in_section(target,data.length)
         var to_overwrite = ("\nThis will overwrite %s notes!\n" % overwrite_notes.size()) if overwrite_notes else ""
@@ -74,7 +70,6 @@ func _paste_color_events():
     main.emit_signal("chart_loaded")
 
 func _on_custom_action(action: StringName) -> void:
-    print("ooer")
     match action:
         "merge":
             _paste_color_events()
