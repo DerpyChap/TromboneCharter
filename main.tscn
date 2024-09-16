@@ -469,6 +469,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 1
 script = ExtResource("9_g46yt")
 
 [node name="WavePreview" type="HBoxContainer" parent="PianoRoll/ChartView/Chart"]
@@ -522,6 +523,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("17_baaho")
 
 [node name="ColorEventsEditor" type="Control" parent="PianoRoll/ChartView/Chart"]
@@ -533,6 +535,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("20_i1tk0")
 
 [node name="PlayheadHandle" type="Control" parent="PianoRoll/ChartView/Chart"]

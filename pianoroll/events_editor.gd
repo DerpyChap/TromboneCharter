@@ -64,6 +64,7 @@ func _gui_input(event):
     if !(event is InputEventMouseButton):
         return
     if event.double_click:
+        accept_event()
         var bar = %Chart.x_to_bar(event.position.x)
         if %Settings.snap_time: bar = snapped(bar, chart.current_subdiv)
         var event_id = 0

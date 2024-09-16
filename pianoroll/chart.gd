@@ -392,6 +392,8 @@ func _gui_input(event):
 				else:
 					settings.section_length = bar - settings.section_start
 		EDIT_MODE: #Edit mode (default)
+			if Global.EVENTS_EDITOR_MODE != 0:
+				return
 			event = event as InputEventMouseButton
 			if event == null || !event.pressed: return
 			if event.button_index == MOUSE_BUTTON_LEFT && !%PreviewController.is_playing:

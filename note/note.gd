@@ -128,6 +128,8 @@ func _process(_delta):
 
 
 func _gui_input(event):
+	if Global.EVENTS_EDITOR_MODE != 0:
+		return
 	var key = event as InputEventKey
 	
 	if key != null && key.pressed:
@@ -137,6 +139,8 @@ func _gui_input(event):
 
 
 func _on_handle_input(event, which_handle):
+	if Global.EVENTS_EDITOR_MODE != 0:
+		return
 	move_child(end_handle, -1 if is_tap_note else 0)
 	move_child(pitch_handle, -1 if Input.is_key_pressed(KEY_SHIFT) else 0)
 	
