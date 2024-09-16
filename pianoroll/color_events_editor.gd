@@ -75,8 +75,6 @@ func _refresh_events():
     _update_events()
 
 func _on_events_mode_item_selected(mode: int) -> void:
-    if mode == Global.EVENTS_EDITOR_MODE:
-        return
     match mode:
         3:
             move_to_front()

@@ -16,7 +16,8 @@ var popup_location : Vector2i:
 	get: return DisplayServer.window_get_position(0) + (Vector2i.ONE * 100)
 
 enum ClipboardType {
-	NOTES
+	NOTES,
+	COLOR_EVENTS
 }
 
 func _ready():
@@ -201,17 +202,36 @@ func _on_copy():
 	var length = Global.settings.section_length
 	print(length)
 	
-	var notes = tmb.find_all_notes_in_section(start,length)
-	if notes.is_empty():
-		print("copy section empy")
-		return
 	var data = {
 		"trombone_charter_data_type": ClipboardType.NOTES,
 		"length": length,
-		"notes": notes
+		"count": 0
 	}
+
+	var data_types = {
+		0: "notes",
+		2: "events",
+		3: "color events"
+	}
+
+	match Global.EVENTS_EDITOR_MODE:
+		3:
+			var events = tmb.find_all_color_events_in_section(start,length)
+			if events.is_empty():
+				return
+			data["trombone_charter_data_type"] = ClipboardType.COLOR_EVENTS
+			data["events"] = events
+			data["count"] = events.size()
+		_:
+			var notes = tmb.find_all_notes_in_section(start,length)
+			if notes.is_empty():
+				print("copy section empy")
+				return
+			data["notes"] = notes
+			data["count"] = notes.size()
+	
 	DisplayServer.clipboard_set(JSON.stringify(data))
-	$Alert.alert("Copied %s notes to clipboard" % notes.size(), Vector2(%ChartView.global_position.x, 10),
+	$Alert.alert("Copied %s %s to clipboard" % [data["count"], data_types[Global.EVENTS_EDITOR_MODE]], Vector2(%ChartView.global_position.x, 10),
 				Alert.LV_SUCCESS)
 
 func _on_paste():
@@ -224,13 +244,12 @@ func _on_paste():
 	var data = j.data
 	if typeof(data) != TYPE_DICTIONARY: return
 	if !data.has('trombone_charter_data_type'): return
+	if %PlayheadPos.value + data.length > tmb.endpoint:
+		$Alert.alert("Can't paste -- would run past the chart endpoint!",
+				Vector2(%ChartView.global_position.x, 10), Alert.LV_ERROR)
+		return
 	match int(data.trombone_charter_data_type):
-		ClipboardType.NOTES:
-			if %PlayheadPos.value + data.length > tmb.endpoint:
-				$Alert.alert("Can't paste -- would run past the chart endpoint!",
-						Vector2(%ChartView.global_position.x, 10), Alert.LV_ERROR)
-				return
-			
+		ClipboardType.NOTES, ClipboardType.COLOR_EVENTS:		
 			var copy_target = Global.settings.playhead_pos
 
 			$CopyConfirm.set_values(copy_target, data)

@@ -129,7 +129,7 @@ func _on_event_mode_changed(mode: int):
                 set_visible(true)
             else:
                 set_visible(false)
-        2:
+        2, 3:
             if not visible:
                 set_visible(true)
         _:

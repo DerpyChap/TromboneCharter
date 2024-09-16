@@ -20,14 +20,22 @@ const NUM_KEYS = 27
 @onready var working_tmb = TMBInfo.new()
 @onready var comp_tmb = TMBInfo.new()
 @onready var ffmpeg_worker = FFmpegWorker.new(self)
+@onready var events_mode = %EventsMode
 var settings : Settings
 func beat_to_time(beat:float) -> float: return beat / (working_tmb.tempo / 60.0)
 func time_to_beat(time:float) -> float: return time * (working_tmb.tempo / 60.0)
 
 var EVENTS_EDITOR_MODE : int:
+	get():
+		if events_mode:
+			EVENTS_EDITOR_MODE = events_mode.get_selected_id()
+		return EVENTS_EDITOR_MODE
 	set(value):
 		EVENTS_EDITOR_MODE = value
 		emit_signal("events_mode_changed",value)
+		if events_mode:
+			var index = events_mode.get_item_index(value)
+			events_mode.select(index)
 
 # shamelessly copied from wikiped https://en.wikipedia.org/wiki/Smoothstep#Variations
 static func smootherstep(from:float, to:float, x:float) -> float:

@@ -68,6 +68,24 @@ func find_all_notes_in_section(start:float,length:float) -> Array:
 		result.append(note)
 	return result
 
+func find_all_color_events_in_section(start:float,length:float) -> Array:
+	var result := []
+	var event_array = color_events.duplicate(true)
+	var is_in_section := func(bar:float) -> bool:
+		return (bar > start && bar < start + length)
+	var pitch_max = len(color_event_pos)
+	var count = len(event_array)
+	for i in range(count):
+		var event = event_array[i]
+		var bar = Global.time_to_beat(event["time"])
+		if !is_in_section.call(bar): continue
+		var pitch = 137.5
+		if i <= pitch_max && pitch_max:
+			pitch = color_event_pos[i]
+		event["time"] = bar - start
+		event["pitch"] = pitch
+		result.append(event)
+	return result
 
 func clear_section(start:float,length:float):
 	var is_in_section := func(bar:float) -> bool:
@@ -89,6 +107,30 @@ func clear_section(start:float,length:float):
 			
 			if note == note_array.back(): any_notes_left = false
 	notes = note_array
+
+func clear_color_events_section(start:float,length:float):
+	var is_in_section := func(bar:float) -> bool:
+		return (bar > start && bar < start + length)
+	print("Clear section %d - %d" % [start,length + start])
+	var event_array = color_events.duplicate(true)
+	var event_pos_array = color_event_pos.duplicate(true)
+	
+	var any_events_left : bool = true
+	while any_events_left:
+		for i in len(event_array):
+			var event = event_array[i]
+			var bar = Global.time_to_beat(event["time"])
+			print("%d notes left" % event_array.size())
+			if is_in_section.call(bar):
+				print("Erase event @ %.3f" % bar)
+				event_array.erase(event)
+				event_pos_array.remove_at(i)
+				if event_array.is_empty(): any_events_left = false
+				break # start from the beginning of the array
+			
+			if event == event_array.back(): any_events_left = false
+	color_events = event_array
+	color_event_pos = event_pos_array
 
 
 func load_from_file(filename:String) -> int:
