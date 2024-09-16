@@ -48,6 +48,24 @@ func package_event_pos() -> Array:
         results_filtered.append(r[0])
     return results_filtered
 
+func _gui_input(event):
+    if Input.is_key_pressed(KEY_SHIFT):
+        %Chart.update_playhead(event)
+        return
+    if !(event is InputEventMouseButton):
+        return
+    if event.double_click:
+        accept_event()
+        var bar = %Chart.x_to_bar(event.position.x)
+        if %Settings.snap_time: bar = snapped(bar, chart.current_subdiv)
+        var event_id = 0
+        var pos = chart.get_local_mouse_position() - Vector2(0, 20)
+        var snapped_pos = chart.to_snapped(pos)
+        var new_event = _add_event(bar,event_id, last_color, 0, snapped_pos.y)
+        new_event.spin_box.get_line_edit().grab_focus()
+    elif !event.is_released():
+        viewport.gui_release_focus()
+
 func _refresh_events():
     var children = get_children()
     
