@@ -39,22 +39,8 @@ func set_values(_target: float, _data: Dictionary):
 func _on_copy_confirmed():
     var data_types = ["notes", "color events"]
     if data.trombone_charter_data_type == main.ClipboardType.COLOR_EVENTS:
-        var events = data.events
-
         main.tmb.clear_color_events_section(target, data.length)
-        var init_time = Global.beat_to_time(events[0]["time"] + target)
-        var insert_pos = 0
-        for event in main.tmb.color_events:
-            if event["time"] > init_time:
-                break
-            insert_pos += 1
-        for event in events:
-            event["time"] = Global.beat_to_time(event["time"] + target)
-            main.tmb.color_event_pos.insert(insert_pos, event["pitch"])
-            event.erase("pitch")
-            main.tmb.color_events.insert(insert_pos, event)
-            insert_pos += 1
-        main.emit_signal("chart_loaded")
+        _paste_color_events()
     elif data.trombone_charter_data_type == main.ClipboardType.NOTES:
         var notes = data.notes
         if notes.is_empty():
@@ -70,3 +56,29 @@ func _on_copy_confirmed():
     Global.settings.section_length = 0
     %Alert.alert("Inserted %s %s from clipboard" % [data.count, data_types[data.trombone_charter_data_type]], Vector2(%ChartView.global_position.x, 10),
                 Alert.LV_SUCCESS)
+
+func _paste_color_events():
+    var events = data.events
+    var init_time = Global.beat_to_time(events[0]["time"] + target)
+    var insert_pos = 0
+    for event in main.tmb.color_events:
+        if event["time"] > init_time:
+            break
+        insert_pos += 1
+    for event in events:
+        event["time"] = Global.beat_to_time(event["time"] + target)
+        main.tmb.color_event_pos.insert(insert_pos, event["pitch"])
+        event.erase("pitch")
+        main.tmb.color_events.insert(insert_pos, event)
+        insert_pos += 1
+    main.emit_signal("chart_loaded")
+
+func _on_custom_action(action: StringName) -> void:
+    print("ooer")
+    match action:
+        "merge":
+            _paste_color_events()
+            Global.settings.section_length = 0
+            %Alert.alert("Inserted %s events from clipboard" % data.count, Vector2(%ChartView.global_position.x, 10),
+                        Alert.LV_SUCCESS)
+    visible = false

@@ -1083,6 +1083,7 @@ text = "toot toot lol"
 [connection signal="chart_loaded" from="." to="PianoRoll/ChartView/Chart/ColorEventsEditor" method="_on_chart_loaded"]
 [connection signal="confirmed" from="NewChartConfirm" to="." method="_on_new_chart_confirmed"]
 [connection signal="confirmed" from="CopyConfirm" to="CopyConfirm" method="_on_copy_confirmed"]
+[connection signal="custom_action" from="CopyConfirm" to="CopyConfirm" method="_on_custom_action"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]
 [connection signal="file_selected" from="LoadCompDialog" to="." method="_on_load_comp_dialog_file_selected"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
