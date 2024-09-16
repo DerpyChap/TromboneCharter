@@ -30,7 +30,6 @@ max_value = 1e+12
 rounded = true
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 select_all_on_focus = true
 
 [node name="DragHandle" type="TextureButton" parent="."]
