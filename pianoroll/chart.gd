@@ -98,6 +98,9 @@ func redraw_notes():
 			child.resize_handles()
 			#child.queue_redraw()
 		else: child.hide()
+	%EventsEditor.move_to_front()
+	%ColorEventsEditor.move_to_front()
+	%PlayheadHandle.move_to_front()
 
 
 func _on_tmb_updated():
@@ -111,6 +114,7 @@ func _do_tmb_update():
 	%PlayheadPos.max_value = tmb.endpoint
 	%LyricsEditor._update_lyrics()
 	%EventsEditor._update_events()
+	%ColorEventsEditor._update_events()
 	%Settings._update_handles()
 	for note in get_children():
 		if !(note is Note) || note.is_queued_for_deletion():
