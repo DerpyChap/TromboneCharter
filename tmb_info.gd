@@ -38,7 +38,7 @@ var timesig 	: int = 2
 var difficulty	: int = 5
 var savednotespacing : int = 120
 
-var color_event_pos := []
+var color_event_pos := {}
 
 
 func has_note_touching_endpoint() -> bool:
@@ -73,17 +73,20 @@ func find_all_color_events_in_section(start:float,length:float) -> Array:
 	var event_array = color_events.duplicate(true)
 	var is_in_section := func(bar:float) -> bool:
 		return (bar > start && bar < start + length)
-	var pitch_max = len(color_event_pos)
 	var count = len(event_array)
 	for i in range(count):
 		var event = event_array[i]
-		var bar = Global.time_to_beat(event["time"])
+		var bar = Global.time_to_beat(event.time)
 		if !is_in_section.call(bar): continue
 		var pitch = 137.5
-		if i <= pitch_max && pitch_max:
-			pitch = color_event_pos[i]
-		event["time"] = bar - start
-		event["pitch"] = pitch
+		var pos_data = color_event_pos.get(str(event.time))
+		if pos_data:
+			for e in pos_data:
+				if e[0] == event.id:
+					pitch = e[1]
+					break
+		event.time = bar - start
+		event.pitch = pitch
 		result.append(event)
 	return result
 
@@ -119,12 +122,12 @@ func clear_color_events_section(start:float,length:float):
 	while any_events_left:
 		for i in len(event_array):
 			var event = event_array[i]
-			var bar = Global.time_to_beat(event["time"])
+			var bar = Global.time_to_beat(event.time)
 			print("%d notes left" % event_array.size())
 			if is_in_section.call(bar):
 				print("Erase event @ %.3f" % bar)
 				event_array.erase(event)
-				event_pos_array.remove_at(i)
+				event_pos_array.erase(str(event.time))
 				if event_array.is_empty(): any_events_left = false
 				break # start from the beginning of the array
 			
@@ -196,19 +199,27 @@ func load_from_file(filename:String) -> int:
 			data["note_color_end"][2]
 		)
 	
+	color_event_pos = {}
 	var m = FileAccess.open(filename + ".chartermeta",FileAccess.READ)
 	if m:
 		var meta_err = m.get_open_error()
-		if meta_err:
-			color_event_pos = []
-		else:
+		if !meta_err:
 			var metajson = JSON.new()
 			err = metajson.parse(m.get_as_text())
 			var metadata = metajson.data
-			if typeof(metadata) != TYPE_DICTIONARY:
-				color_event_pos = []
-			else:
-				color_event_pos = metadata.color_pos
+			if typeof(metadata) == TYPE_DICTIONARY:
+				# convert old format, TODO: remove this when it's no longer needed
+				if metadata.color_pos is Array:
+					for i in len(color_events):
+						var event = color_events[i]
+						var pos = metadata.color_pos[i]
+						var positions = color_event_pos.get(str(event.time), [])
+						positions.append([event.id, pos])
+						color_event_pos[str(event.time)] = positions
+				else:
+					for time in metadata.color_pos:
+						#convert to float because json only supports strings for keys
+						color_event_pos[time] = metadata.color_pos[time]
 	
 	return LoadResult.SUCCESS
 

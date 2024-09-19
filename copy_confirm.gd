@@ -63,7 +63,11 @@ func _paste_color_events():
         insert_pos += 1
     for event in events:
         event["time"] = Global.beat_to_time(event["time"] + target)
-        main.tmb.color_event_pos.insert(insert_pos, event["pitch"])
+        print(event["time"])
+        var time_str = str(event["time"])
+        var pos_data = main.tmb.color_event_pos.get(time_str, [])
+        pos_data.append([event["id"], event["pitch"]])
+        main.tmb.color_event_pos[time_str] = pos_data
         event.erase("pitch")
         main.tmb.color_events.insert(insert_pos, event)
         insert_pos += 1
