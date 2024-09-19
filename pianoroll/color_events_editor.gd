@@ -77,7 +77,6 @@ func _refresh_events():
     
     var color_events = Global.working_tmb.color_events
     var color_event_pos = Global.working_tmb.color_event_pos
-    print(color_event_pos)
     var count = len(color_events)
 
     for i in range(count):

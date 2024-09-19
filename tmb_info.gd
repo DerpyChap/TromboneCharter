@@ -101,9 +101,9 @@ func clear_section(start:float,length:float):
 		for note in note_array:
 			var bar = note[NOTE_BAR]
 			var end = bar + note[NOTE_LENGTH]
-			print("%d notes left" % note_array.size())
+			# print("%d notes left" % note_array.size())
 			if is_in_section.call(bar) || is_in_section.call(end):
-				print("Erase note @ %.3f" % bar)
+				# print("Erase note @ %.3f" % bar)
 				note_array.erase(note)
 				if note_array.is_empty(): any_notes_left = false
 				break # start from the beginning of the array
@@ -123,9 +123,9 @@ func clear_color_events_section(start:float,length:float):
 		for i in len(event_array):
 			var event = event_array[i]
 			var bar = Global.time_to_beat(event.time)
-			print("%d notes left" % event_array.size())
+			# print("%d notes left" % event_array.size())
 			if is_in_section.call(bar):
-				print("Erase event @ %.3f" % bar)
+				# print("Erase event @ %.3f" % bar)
 				event_array.erase(event)
 				event_pos_array.erase(str(event.time))
 				if event_array.is_empty(): any_events_left = false
