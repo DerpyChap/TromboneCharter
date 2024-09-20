@@ -262,7 +262,15 @@ func save_to_file(filename : String) -> int:
 		print(error_string(err))
 		return err
 	
+	var color_events_copy = color_events.duplicate(true)
+	
+	for i in range(color_events.size()):
+		var event = color_events[i]
+		event.erase("pitch")
+		color_events[i] = event
+
 	var dict := to_dict()
+	color_events = color_events_copy
 	# gdscript doesn't support keyword parameters 👎
 	f.store_string(JSON.stringify(dict, "", false))
 	print("finished saving")
