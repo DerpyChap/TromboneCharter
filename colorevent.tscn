@@ -150,5 +150,5 @@ theme_override_font_sizes/font_size = 10
 [connection signal="ready" from="UI/ColorPickerButton" to="." method="_on_color_picker_button_ready"]
 [connection signal="gui_input" from="UI/Duration" to="." method="_on_focus_entered"]
 [connection signal="value_changed" from="UI/Duration" to="." method="_on_duration_value_changed"]
-[connection signal="gui_input" from="UI/DragHandle" to="." method="_on_drag_handle_gui_input"]
 [connection signal="gui_input" from="UI/DragHandle" to="." method="_on_focus_entered"]
+[connection signal="gui_input" from="UI/DragHandle" to="." method="_on_drag_handle_gui_input"]

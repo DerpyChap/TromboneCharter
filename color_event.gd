@@ -45,6 +45,12 @@ func set_label():
             label.text = "MidRightFloorLight"
         13:
             label.text = "FarRightFloorLight"
+        20:
+            label.text = "AuroraTopColor"
+        21:
+            label.text = "AuroraBottomColor"
+        22:
+            label.text = "AuroraNoteColor"
         _:
             label.text = ""
 

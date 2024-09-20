@@ -228,7 +228,7 @@ func _on_copy():
 			data["notes"] = notes
 			data["count"] = notes.size()
 	
-	DisplayServer.clipboard_set(JSON.stringify(data))
+	DisplayServer.clipboard_set(JSON.stringify(data, "", false))
 	$Alert.alert("Copied %s %s to clipboard" % [data["count"], data_types[Global.EVENTS_EDITOR_MODE]], Vector2(%ChartView.global_position.x, 10),
 				Alert.LV_SUCCESS)
 
