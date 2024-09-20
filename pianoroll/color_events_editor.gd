@@ -16,7 +16,6 @@ func _add_event(bar:float,id:int,color:Color = last_color, duration: float = 0, 
     new_event.pitch = pitch
     add_child(new_event)
     Global.working_tmb.color_events = package_events()
-    Global.working_tmb.color_event_pos = package_event_pos()
     return new_event
 
 func package_events() -> Array:
@@ -30,23 +29,11 @@ func package_events() -> Array:
             "r": event.color.r,
             "g": event.color.g,
             "b": event.color.b,
-            "a": event.color.a
+            "a": event.color.a,
+            "pitch": event.pitch
         }
         result.append(data)
     result.sort_custom(func(a, b): return (a["time"] < b["time"]))
-    return result
-
-func package_event_pos() -> Dictionary:
-    var result := {}
-    for event : ColorEvent in get_children():
-        if !(event is ColorEvent) || event.is_queued_for_deletion(): continue
-        # turning this into a string fixed comparisons erroneously returning false presumably
-        # due to floating point issues, but when i checked i didn't spot any and they didn't happen
-        # on chart load so ¯\_(ツ)_/¯
-        var time = str(Global.beat_to_time(event.bar))
-        var events = result.get(time, [])
-        events.append([event.id, event.pitch])
-        result[time] = events
     return result
 
 func _gui_input(event):
@@ -76,20 +63,12 @@ func _refresh_events():
             child.queue_free()
     
     var color_events = Global.working_tmb.color_events
-    var color_event_pos = Global.working_tmb.color_event_pos
     var count = len(color_events)
 
     for i in range(count):
         var event = color_events[i]
-        var pitch = 137.5
-        var pos_data = color_event_pos.get(str(event["time"]))
-        if pos_data:
-            for e in pos_data:
-                if e[0] == event.id:
-                    pitch = e[1]
-                    break
         var color = Color(event["r"], event["g"], event["b"], event["a"])
-        _add_event(Global.time_to_beat(event["time"]),event["id"], color, event["duration"], pitch)
+        _add_event(Global.time_to_beat(event["time"]),event["id"], color, event["duration"], event["pitch"])
     
     _update_events()
 

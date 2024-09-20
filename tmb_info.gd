@@ -38,9 +38,6 @@ var timesig 	: int = 2
 var difficulty	: int = 5
 var savednotespacing : int = 120
 
-var color_event_pos := {}
-
-
 func has_note_touching_endpoint() -> bool:
 	if notes.is_empty(): return false
 	var last_note = notes[-1]
@@ -78,15 +75,7 @@ func find_all_color_events_in_section(start:float,length:float) -> Array:
 		var event = event_array[i]
 		var bar = Global.time_to_beat(event.time)
 		if !is_in_section.call(bar): continue
-		var pitch = 137.5
-		var pos_data = color_event_pos.get(str(event.time))
-		if pos_data:
-			for e in pos_data:
-				if e[0] == event.id:
-					pitch = e[1]
-					break
 		event.time = bar - start
-		event.pitch = pitch
 		result.append(event)
 	return result
 
@@ -116,7 +105,6 @@ func clear_color_events_section(start:float,length:float):
 		return (bar > start && bar < start + length)
 	print("Clear section %d - %d" % [start,length + start])
 	var event_array = color_events.duplicate(true)
-	var event_pos_array = color_event_pos.duplicate(true)
 	
 	var any_events_left : bool = true
 	while any_events_left:
@@ -127,14 +115,40 @@ func clear_color_events_section(start:float,length:float):
 			if is_in_section.call(bar):
 				# print("Erase event @ %.3f" % bar)
 				event_array.erase(event)
-				event_pos_array.erase(str(event.time))
 				if event_array.is_empty(): any_events_left = false
 				break # start from the beginning of the array
 			
 			if event == event_array.back(): any_events_left = false
 	color_events = event_array
-	color_event_pos = event_pos_array
 
+func sort_id_ascending(a, b):
+	if a["id"] < b["id"]:
+		return true
+	return false
+
+func auto_sort_color_events():
+	# aims to sort events vertically in instances where that metadata is unavailable
+	var grouped_events = {}
+	var sorted_array = []
+	for event in color_events:
+		var events = grouped_events.get_or_add(str(event.time), [])
+		events.append(event)
+		grouped_events[str(event.time)] = events
+	
+	var keys = grouped_events.keys()
+	keys.sort()
+	for time in keys:
+		var events = grouped_events[time]
+		events.sort_custom(sort_id_ascending)
+		var count = events.size()
+		var events_sorted = []
+		for i in range(count):
+			var event = events[i]
+			event["pitch"] = clamp(137.5 - (Global.SEMITONE * i), Global.SEMITONE * -13, Global.SEMITONE * 13)
+			events_sorted.append(event)
+		sorted_array.append(events_sorted)
+	
+	color_events = sorted_array
 
 func load_from_file(filename:String) -> int:
 	var f = FileAccess.open(filename,FileAccess.READ)
@@ -199,27 +213,43 @@ func load_from_file(filename:String) -> int:
 			data["note_color_end"][2]
 		)
 	
-	color_event_pos = {}
 	var m = FileAccess.open(filename + ".chartermeta",FileAccess.READ)
 	if m:
 		var meta_err = m.get_open_error()
 		if !meta_err:
 			var metajson = JSON.new()
 			err = metajson.parse(m.get_as_text())
-			var metadata = metajson.data
-			if typeof(metadata) == TYPE_DICTIONARY:
-				# convert old format, TODO: remove this when it's no longer needed
-				if metadata.color_pos is Array:
-					for i in len(color_events):
-						var event = color_events[i]
-						var pos = metadata.color_pos[i]
-						var positions = color_event_pos.get(str(event.time), [])
-						positions.append([event.id, pos])
-						color_event_pos[str(event.time)] = positions
+			if err:
+				auto_sort_color_events()
+			else:
+				var metadata = metajson.data
+				if typeof(metadata) == TYPE_DICTIONARY:
+					# convert old format, TODO: remove this when it's no longer needed
+					if not metadata.get("color_pos"):
+						auto_sort_color_events()
+					elif metadata.color_pos is Array:
+						for i in len(color_events):
+							# var event = color_events[i]
+							# var pos = metadata.color_pos[i]
+							# var positions = color_event_pos.get(str(event.time), [])
+							# positions.append([event.id, pos])
+							# color_event_pos[str(event.time)] = positions
+							var event = color_events[i]
+							event["pitch"] = metadata.color_pos[i]
+							color_events[i] = event
+					else:
+						for i in range(color_events.size()):
+							var event = color_events[i]
+							event["pitch"] = 137.5
+							var positions = metadata.color_pos.get(str(event.time), [])
+							if positions:
+								for position in positions:
+									if position[0] == event.id:
+										event["pitch"] = position[1]
 				else:
-					for time in metadata.color_pos:
-						#convert to float because json only supports strings for keys
-						color_event_pos[time] = metadata.color_pos[time]
+					auto_sort_color_events()
+		else:
+			auto_sort_color_events()
 	
 	return LoadResult.SUCCESS
 
@@ -235,18 +265,21 @@ func save_to_file(filename : String) -> int:
 	var dict := to_dict()
 	# gdscript doesn't support keyword parameters 👎
 	f.store_string(JSON.stringify(dict, "", false))
-	print(color_event_pos)
 	print("finished saving")
 
 	# TODO: save this data as custom data in the new TMB format
-	if color_event_pos:
+	if color_events:
 		var m = FileAccess.open(filename + ".chartermeta",FileAccess.WRITE)
 		if m == null:
 			var err = FileAccess.get_open_error()
 			print(error_string(err))
 		else:
 			var metadict := {}
-			metadict["color_pos"] = color_event_pos
+			metadict["color_pos"] = {}
+			for event in color_events:
+				var position = metadict["color_pos"].get_or_add(str(event.time), [])
+				position.append([event.id, event.pitch])
+				metadict["color_pos"][str(event.time)] = position
 			m.store_string(JSON.stringify(metadict))
 			print("finished saving charter metadata")
 	return OK

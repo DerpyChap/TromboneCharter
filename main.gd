@@ -198,9 +198,7 @@ func try_cfg_save():
 
 func _on_copy():
 	var start = Global.settings.section_start
-	print(start)
 	var length = Global.settings.section_length
-	print(length)
 	
 	var data = {
 		"trombone_charter_data_type": ClipboardType.NOTES,
