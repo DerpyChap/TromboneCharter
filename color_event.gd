@@ -54,7 +54,6 @@ func _process(_delta):
         dragging = false
         bar = chart.x_to_bar(position.x)
         Global.working_tmb.color_events = color_editor.package_events()
-        Global.working_tmb.color_event_pos = color_editor.package_event_pos()
         return
     var pos = chart.get_local_mouse_position() - Vector2(0, 20)
     var snapped_pos = chart.to_snapped(pos)
@@ -69,7 +68,6 @@ func _draw():
 func _on_delete_button_pressed():
     queue_free()
     Global.working_tmb.color_events = color_editor.package_events()
-    Global.working_tmb.color_event_pos = color_editor.package_event_pos()
     color_editor._refresh_events()
 
 func _on_spin_box_value_changed(new_id):
