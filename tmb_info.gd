@@ -128,6 +128,7 @@ func sort_id_ascending(a, b):
 
 func auto_sort_color_events():
 	# aims to sort events vertically in instances where that metadata is unavailable
+	# kinda terrible atm
 	var grouped_events = {}
 	var sorted_array = []
 	for event in color_events:
@@ -144,9 +145,9 @@ func auto_sort_color_events():
 		var events_sorted = []
 		for i in range(count):
 			var event = events[i]
-			event["pitch"] = clamp(137.5 - (Global.SEMITONE * i), Global.SEMITONE * -13, Global.SEMITONE * 13)
+			event["pitch"] = clamp(137.5 - (Global.SEMITONE * (i * 2)), Global.SEMITONE * -13, Global.SEMITONE * 13)
 			events_sorted.append(event)
-		sorted_array.append(events_sorted)
+		sorted_array.append_array(events_sorted)
 	
 	color_events = sorted_array
 
@@ -250,6 +251,8 @@ func load_from_file(filename:String) -> int:
 					auto_sort_color_events()
 		else:
 			auto_sort_color_events()
+	else:
+		auto_sort_color_events()
 	
 	return LoadResult.SUCCESS
 
