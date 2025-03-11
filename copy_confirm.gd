@@ -2,8 +2,10 @@ extends AcceptDialog
 
 @onready var main : Node = get_parent()
 @onready var merge_button : Button = add_button("Merge", false, "merge")
+@onready var color_events : ColorEventsEditor = %ColorEventsEditor
 var target: float
 var data: Dictionary
+var overwrite_events: Array
 
 var notes_template = """Are you sure you want to paste %s notes at beat %s?
 %s
@@ -16,7 +18,7 @@ func set_values(_target: float, _data: Dictionary):
     data = _data
     # no match statement here because it just... didn't work? might be a weird gdscript bug
     if data.trombone_charter_data_type == main.ClipboardType.COLOR_EVENTS:
-        var overwrite_events = main.tmb.find_all_color_events_in_section(target,data.length)
+        overwrite_events = main.tmb.find_all_color_events_in_section(target,data.length)
         dialog_text = events_template % [data.count, target]
         if overwrite_events:
             ok_button_text = "Overwrite"
@@ -35,7 +37,9 @@ func set_values(_target: float, _data: Dictionary):
 func _on_copy_confirmed():
     var data_types = ["notes", "color events"]
     if data.trombone_charter_data_type == main.ClipboardType.COLOR_EVENTS:
-        main.tmb.clear_color_events_section(target, data.length)
+#        main.tmb.clear_color_events_section(target, data.length)
+        for e in overwrite_events:
+            e.queue_free()
         _paste_color_events()
     elif data.trombone_charter_data_type == main.ClipboardType.NOTES:
         var notes = data.notes
@@ -55,17 +59,10 @@ func _on_copy_confirmed():
 
 func _paste_color_events():
     var events = data.events
-    var init_time = Global.beat_to_time(events[0]["time"] + target)
-    var insert_pos = 0
-    for event in main.tmb.color_events:
-        if event["time"] > init_time:
-            break
-        insert_pos += 1
     for event in events:
-        event["time"] = Global.beat_to_time(event["time"] + target)
-        main.tmb.color_events.insert(insert_pos, event)
-        insert_pos += 1
-    main.emit_signal("chart_loaded")
+        var color := Color(event["r"], event["g"], event["b"], event["a"])
+        color_events._add_event(event["time"] + target, event["id"], color, event["duration"], event["pitch"], false)
+    Global.working_tmb.color_events = color_events.package_events()
 
 func _on_custom_action(action: StringName) -> void:
     match action:

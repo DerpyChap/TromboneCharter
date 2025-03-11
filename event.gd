@@ -114,7 +114,6 @@ func _draw():
 func _on_delete_button_pressed():
     queue_free()
     Global.working_tmb.bgdata = editor.package_events()
-    editor._refresh_events()
 
 func _on_spin_box_value_changed(new_id):
     if new_id != id:

@@ -2,6 +2,7 @@
 .godot/
 
 .vscode/
+.idea/
 
 # Godot doesn't like it when export folders don't exist
 build/**/*.*
