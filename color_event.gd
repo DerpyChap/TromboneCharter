@@ -54,6 +54,14 @@ func set_label():
         _:
             label.text = ""
 
+func _gui_input(event) -> void:
+    if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
+        queue_free()
+        Global.working_tmb.color_events = color_editor.package_events()
+    elif Input.is_action_pressed("color_event_delete"):
+        queue_free()
+        Global.working_tmb.color_events = color_editor.package_events()
+
 func _process(_delta):
     if !dragging: return
     if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -100,7 +108,6 @@ func _on_focus_entered() -> void:
     move_to_front()
 
 func _notification(what):
-    match what:
-        NOTIFICATION_RESIZED:
+    if what == NOTIFICATION_RESIZED:
             if _ui:
                 _ui.position.y = chart.pitch_to_height(pitch)
