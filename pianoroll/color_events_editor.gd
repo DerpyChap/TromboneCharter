@@ -54,6 +54,19 @@ func _gui_input(event) -> void:
         new_event.spin_box.get_line_edit().grab_focus()
     elif !event.is_released():
         viewport.gui_release_focus()
+        
+func find_all_color_event_objects_in_selection(start:float, length:float) -> Array:
+    var children: Array[Node] = get_children()
+    var events: Array
+    var is_in_section := func(bar:float) -> bool:
+        return (bar > start && bar < start + length)
+    
+    for child in children:
+        if child is ColorEvent:
+           if is_in_section.call(child.bar):
+            events.append(child)
+    
+    return events
 
 func _refresh_events():
     var children: Array[Node] = get_children()

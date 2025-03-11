@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dqnjrk008ccpy"]
+[gd_scene load_steps=32 format=3 uid="uid://dqnjrk008ccpy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_4hx5p"]
 [ext_resource type="Script" path="res://save_load.gd" id="2_37xub"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://pianoroll/chart_view.gd" id="8_j823s"]
 [ext_resource type="Script" path="res://ffmpeg_instructions.gd" id="8_wmpcw"]
 [ext_resource type="Script" path="res://pianoroll/chart.gd" id="9_g46yt"]
+[ext_resource type="Script" path="res://delete_confirm.gd" id="9_q4cr0"]
 [ext_resource type="Script" path="res://pianoroll/wave_preview.gd" id="10_8jxge"]
 [ext_resource type="Script" path="res://color_preview.gd" id="10_14v0o"]
 [ext_resource type="Script" path="res://section_handle.gd" id="10_fs4d4"]
@@ -97,6 +98,19 @@ dialog_text = "Are you sure you want to paste %s notes?
 Notes with tails going into or out of the section might end up overlapping other notes."
 dialog_autowrap = true
 script = ExtResource("7_m5n28")
+
+[node name="DeleteConfirm" type="ConfirmationDialog" parent="."]
+auto_translate_mode = 1
+title = "You Sure?"
+position = Vector2i(200, 200)
+size = Vector2i(234, 192)
+unresizable = true
+ok_button_text = "Yes"
+dialog_text = "Are you sure you want to delete the selected events?
+
+This action cannot be undone!"
+dialog_autowrap = true
+script = ExtResource("9_q4cr0")
 
 [node name="LoadDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
@@ -1093,6 +1107,7 @@ text = "toot toot lol"
 [connection signal="confirmed" from="NewChartConfirm" to="." method="_on_new_chart_confirmed"]
 [connection signal="confirmed" from="CopyConfirm" to="CopyConfirm" method="_on_copy_confirmed"]
 [connection signal="custom_action" from="CopyConfirm" to="CopyConfirm" method="_on_custom_action"]
+[connection signal="confirmed" from="DeleteConfirm" to="DeleteConfirm" method="_on_delete_events"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]
 [connection signal="file_selected" from="LoadCompDialog" to="." method="_on_load_comp_dialog_file_selected"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]

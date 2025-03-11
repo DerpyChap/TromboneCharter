@@ -18,7 +18,7 @@ func set_values(_target: float, _data: Dictionary):
     data = _data
     # no match statement here because it just... didn't work? might be a weird gdscript bug
     if data.trombone_charter_data_type == main.ClipboardType.COLOR_EVENTS:
-        overwrite_events = main.tmb.find_all_color_events_in_section(target,data.length)
+        overwrite_events = color_events.find_all_color_event_objects_in_selection(target,data.length)
         dialog_text = events_template % [data.count, target]
         if overwrite_events:
             ok_button_text = "Overwrite"
