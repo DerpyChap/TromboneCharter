@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyqwt6pgwm8ae"]
 
-[ext_resource type="Script" path="res://lyric.gd" id="1_7oxlp"]
+[ext_resource type="Script" uid="uid://d2woyvdq0d31t" path="res://lyric.gd" id="1_7oxlp"]
 [ext_resource type="Texture2D" uid="uid://bf23fo001m0n4" path="res://trashcan.svg" id="1_517y3"]
 [ext_resource type="Texture2D" uid="uid://cu0ygufwrvrfu" path="res://draghandle.svg" id="3_65fow"]
 

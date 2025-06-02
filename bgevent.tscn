@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bff0vks45russ"]
 
-[ext_resource type="Script" path="res://event.gd" id="1_qofpu"]
+[ext_resource type="Script" uid="uid://20f5ob7hof1k" path="res://event.gd" id="1_qofpu"]
 [ext_resource type="Texture2D" uid="uid://bf23fo001m0n4" path="res://trashcan.svg" id="2_v4asq"]
 [ext_resource type="Texture2D" uid="uid://cu0ygufwrvrfu" path="res://draghandle.svg" id="3_qch4g"]
 

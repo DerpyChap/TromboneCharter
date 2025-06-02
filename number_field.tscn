@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bu6gxk0umr8do"]
 
-[ext_resource type="Script" path="res://num_field.gd" id="1_3dq3l"]
+[ext_resource type="Script" uid="uid://c7k5rnjvfmogr" path="res://num_field.gd" id="1_3dq3l"]
 
 [node name="NumField" type="HBoxContainer"]
 offset_right = 198.0
