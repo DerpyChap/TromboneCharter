@@ -11,6 +11,7 @@ var _update_queued := false
 func _ready():
     print("ready")
     Global.tmb_updated.connect(_on_tmb_update)
+    get_tree().current_scene.chart_loaded.connect(_on_chart_loaded)
 
 func _on_tmb_update(): _update_queued = true
 func _process(_delta): if _update_queued: _update_events()

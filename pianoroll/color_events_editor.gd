@@ -6,6 +6,7 @@ extends EventsEditor
 
 func _ready():
     Global.tmb_updated.connect(_on_tmb_update)
+    get_tree().current_scene.chart_loaded.connect(_on_chart_loaded)
 
 func _add_event(bar:float,id:int,color:Color = last_color, duration: float = 0, pitch = 137.5, package = true):
     var new_event := color_event_scn.instantiate()
@@ -81,7 +82,7 @@ func _refresh_events():
         var color := Color(event["r"], event["g"], event["b"], event["a"])
         _add_event(Global.time_to_beat(event["time"]),event["id"], color, event["duration"], event["pitch"], false)
         
-    Global.working_tmb.color_events = package_events()	
+    Global.working_tmb.color_events = package_events()    
 
 func _on_events_mode_item_selected(mode: int) -> void:
     match mode:
