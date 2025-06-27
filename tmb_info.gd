@@ -25,18 +25,18 @@ var lyrics := []
 var improv_zones := []
 var bgdata := []
 var color_events := []
-var title		:= ""
-var shortName	:= ""
-var author		:= ""
-var charter		:= ""
-var genre		:= ""
+var title       := ""
+var shortName   := ""
+var author      := ""
+var charter     := ""
+var genre       := ""
 var description := ""
 var trackRef    := ""
-var year		: int = 1999
-var tempo		: float = 120
-var endpoint	: int = 4
-var timesig 	: int = 2
-var difficulty	: int = 5
+var year        : int = 1999
+var tempo       : float = 120
+var endpoint    : int = 4
+var timesig     : int = 2
+var difficulty  : int = 5
 var savednotespacing : int = 120
 
 func has_note_touching_endpoint() -> bool:
@@ -172,21 +172,21 @@ func load_from_file(filename:String) -> int:
         print("JSON got back object of type %s" % typeof(data))
         return LoadResult.TMB_INVALID
     
-    notes		= data.notes as Array[Dictionary]
-    lyrics		= data.lyrics as Array[Dictionary]
+    notes       = data.notes as Array[Dictionary]
+    lyrics      = data.lyrics as Array[Dictionary]
     
-    title		= data.name
-    shortName	= data.shortName
-    author		= data.author
-    genre		= data.genre
+    title       = data.name
+    shortName   = data.shortName
+    author      = data.author
+    genre       = data.genre
     description = data.description
     trackRef    = data.trackRef
     
-    year		= int(data.year)
-    tempo		= data.tempo
-    endpoint	= data.endpoint
-    timesig 	= data.timesig
-    difficulty	= data.difficulty
+    year        = int(data.year)
+    tempo       = data.tempo
+    endpoint    = data.endpoint
+    timesig     = data.timesig
+    difficulty  = data.difficulty
     savednotespacing = data.savednotespacing
 
     if data.has('charter'):
@@ -271,7 +271,6 @@ func save_to_file(filename : String) -> int:
         return err
     
     var color_events_copy = color_events.duplicate(true)
-    
     for i in range(color_events.size()):
         var event = color_events[i]
         event.erase("pitch")
@@ -304,8 +303,14 @@ func to_dict() -> Dictionary:
     var dict := {}
     
     for value in Global.settings.values:
-        if !(value is TextField || value is NumField): continue
-        dict[value.json_key] = value.value
+        if value is NumField:
+            if !value.is_float:
+                dict[value.json_key] = int(value.value)
+            else:
+                dict[value.json_key] = value.value
+        elif value is TextField:
+            dict[value.json_key] = value.value
+        else: continue
     
     for note in notes: if (note[NOTE_BAR] + note[NOTE_LENGTH]) > endpoint: notes.erase(note)
     for lyric in lyrics: if lyric.bar > endpoint: lyrics.erase(lyric)
