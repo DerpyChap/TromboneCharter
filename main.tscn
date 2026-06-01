@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dqnjrk008ccpy"]
+[gd_scene format=3 uid="uid://dqnjrk008ccpy"]
 
 [ext_resource type="Script" uid="uid://cufslxllwminh" path="res://main.gd" id="1_4hx5p"]
 [ext_resource type="Script" uid="uid://byahu24tbd3le" path="res://save_load.gd" id="2_37xub"]
@@ -39,7 +39,7 @@ border_width_left = 8
 border_width_right = 8
 border_color = Color(0.25098, 0.25098, 0.25098, 1)
 
-[node name="Main" type="VBoxContainer"]
+[node name="Main" type="VBoxContainer" unique_id=397061896]
 anchors_preset = -1
 anchor_right = 1.011
 anchor_bottom = 1.0
@@ -51,36 +51,36 @@ theme = SubResource("Theme_eswg4")
 theme_override_constants/separation = 0
 script = ExtResource("1_4hx5p")
 
-[node name="SaveLoad" type="Node" parent="."]
+[node name="SaveLoad" type="Node" parent="." unique_id=1924279660]
 script = ExtResource("2_37xub")
 
-[node name="PreviewController" type="Node" parent="."]
+[node name="PreviewController" type="Node" parent="." unique_id=711998468]
 unique_name_in_owner = true
 script = ExtResource("2_rsc0c")
 
-[node name="TrombPlayer" type="AudioStreamPlayer" parent="."]
+[node name="TrombPlayer" type="AudioStreamPlayer" parent="." unique_id=990910044]
 unique_name_in_owner = true
 stream = ExtResource("3_6p5u3")
 volume_db = -3.0
 max_polyphony = 16
 
-[node name="MetronomePlayer" type="AudioStreamPlayer" parent="."]
+[node name="MetronomePlayer" type="AudioStreamPlayer" parent="." unique_id=141982799]
 unique_name_in_owner = true
 stream = ExtResource("4_wfwxx")
 
-[node name="TrackPlayer" type="AudioStreamPlayer" parent="."]
+[node name="TrackPlayer" type="AudioStreamPlayer" parent="." unique_id=334874022]
 unique_name_in_owner = true
 volume_db = -5.0
 
-[node name="Chord" type="AudioStreamPlayer" parent="."]
+[node name="Chord" type="AudioStreamPlayer" parent="." unique_id=689613321]
 unique_name_in_owner = true
 stream = ExtResource("5_vqfbf")
 
-[node name="EventsAPI" type="Node" parent="."]
+[node name="EventsAPI" type="Node" parent="." unique_id=1564337653]
 unique_name_in_owner = true
 script = ExtResource("27_trcdr")
 
-[node name="NewChartConfirm" type="ConfirmationDialog" parent="."]
+[node name="NewChartConfirm" type="ConfirmationDialog" parent="." unique_id=1879758484]
 title = "You Sure?"
 position = Vector2i(200, 200)
 size = Vector2i(234, 123)
@@ -88,7 +88,7 @@ unresizable = true
 dialog_text = "Really make a new TMB and discard any unsaved changes?"
 dialog_autowrap = true
 
-[node name="CopyConfirm" type="ConfirmationDialog" parent="."]
+[node name="CopyConfirm" type="ConfirmationDialog" parent="." unique_id=283746826]
 title = "You Sure?"
 position = Vector2i(200, 200)
 size = Vector2i(234, 192)
@@ -99,7 +99,7 @@ Notes with tails going into or out of the section might end up overlapping other
 dialog_autowrap = true
 script = ExtResource("7_m5n28")
 
-[node name="DeleteConfirm" type="ConfirmationDialog" parent="."]
+[node name="DeleteConfirm" type="ConfirmationDialog" parent="." unique_id=603565249]
 auto_translate_mode = 1
 title = "You Sure?"
 position = Vector2i(200, 200)
@@ -112,7 +112,7 @@ This action cannot be undone!"
 dialog_autowrap = true
 script = ExtResource("9_q4cr0")
 
-[node name="LoadDialog" type="FileDialog" parent="."]
+[node name="LoadDialog" type="FileDialog" parent="." unique_id=780675045]
 unique_name_in_owner = true
 title = "Load Chart"
 size = Vector2i(600, 360)
@@ -123,7 +123,7 @@ access = 2
 filters = PackedStringArray("*.tmb ; Trombone Champ Chart")
 use_native_dialog = true
 
-[node name="LoadCompDialog" type="FileDialog" parent="."]
+[node name="LoadCompDialog" type="FileDialog" parent="." unique_id=1710707322]
 unique_name_in_owner = true
 title = "Select a chart to compare with"
 size = Vector2i(600, 360)
@@ -134,7 +134,7 @@ access = 2
 filters = PackedStringArray("*.tmb ; Trombone Champ Chart")
 use_native_dialog = true
 
-[node name="SaveDialog" type="FileDialog" parent="."]
+[node name="SaveDialog" type="FileDialog" parent="." unique_id=1720436564]
 unique_name_in_owner = true
 title = "Save Chart"
 size = Vector2i(600, 360)
@@ -143,17 +143,17 @@ access = 2
 filters = PackedStringArray("*.tmb ; Trombone Champ Chart")
 use_native_dialog = true
 
-[node name="ErrorPopup" type="AcceptDialog" parent="."]
+[node name="ErrorPopup" type="AcceptDialog" parent="." unique_id=605705721]
 unique_name_in_owner = true
 title = "Error"
 
-[node name="Instructions" type="AcceptDialog" parent="."]
+[node name="Instructions" type="AcceptDialog" parent="." unique_id=1947500911]
 title = "Usage"
 position = Vector2i(200, 48)
 size = Vector2i(720, 600)
 dialog_autowrap = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Instructions"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Instructions" unique_id=786976092]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 712.0
@@ -184,13 +184,13 @@ Preview timing can be wonky because it can only update at the refresh rate of yo
 Created with Godot 4 by twi — [url=\"https://twitter.com/towaii\"]twitter/@towaii[/url] — [url=\"https://github.com/towai\"]github/towai[/url]
 I'm in the [url=\"https://discord.gg/KVzKRsbetJ\"]Trombone Champ Modding Discord[/url] if you have issues or potential improvements, or you can submit them as a [url=\"https://github.com/towai/TromboneCharter\"]GitHub issue[/url]."
 
-[node name="FFmpegInstructions" type="AcceptDialog" parent="."]
+[node name="FFmpegInstructions" type="AcceptDialog" parent="." unique_id=1398517746]
 title = "Using Advanced Features with FFmpeg"
 position = Vector2i(200, 48)
 size = Vector2i(720, 350)
 dialog_autowrap = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="FFmpegInstructions"]
+[node name="RichTextLabel" type="RichTextLabel" parent="FFmpegInstructions" unique_id=1704817340]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 712.0
@@ -210,7 +210,7 @@ Then, stick [code]ffmpeg.exe[/code] either in the Trombone Charter folder, or an
 You can add a custom one and put anything you like in it![/ul][/ul][/ul]"
 script = ExtResource("8_wmpcw")
 
-[node name="DiffCalc" type="Window" parent="."]
+[node name="DiffCalc" type="Window" parent="." unique_id=1728862793]
 title = "TootTally Difficulty Calculator"
 position = Vector2i(200, 36)
 size = Vector2i(700, 600)
@@ -219,46 +219,47 @@ wrap_controls = true
 transient = true
 content_scale_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="DiffCalc"]
+[node name="PanelContainer" type="PanelContainer" parent="DiffCalc" unique_id=1312462421]
 offset_right = 700.0
 offset_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DiffCalc/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DiffCalc/PanelContainer" unique_id=933534966]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="DiffCalc/PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="DiffCalc/PanelContainer/VBoxContainer" unique_id=1253657628]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ecsdr")
 
-[node name="CalcInfo" type="RichTextLabel" parent="DiffCalc/PanelContainer/VBoxContainer/PanelContainer"]
+[node name="CalcInfo" type="RichTextLabel" parent="DiffCalc/PanelContainer/VBoxContainer/PanelContainer" unique_id=1699948440]
 layout_mode = 2
 theme_override_fonts/mono_font = ExtResource("7_jt8rs")
 bbcode_enabled = true
 text = "What is Up my Dude"
 tab_size = 2
 
-[node name="Button" type="Button" parent="DiffCalc/PanelContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="DiffCalc/PanelContainer/VBoxContainer" unique_id=176558791]
 layout_mode = 2
 text = "OK"
 
-[node name="EventTester" type="Window" parent="."]
+[node name="EventTester" type="Window" parent="." unique_id=224808547]
 unique_name_in_owner = true
+oversampling_override = 1.0
 title = "Events Previewer"
 position = Vector2i(0, 36)
 size = Vector2i(737, 451)
 visible = false
 unresizable = true
 
-[node name="PanelContainer" type="PanelContainer" parent="EventTester"]
+[node name="PanelContainer" type="PanelContainer" parent="EventTester" unique_id=1616580266]
 offset_right = 590.0
 offset_bottom = 300.0
 
-[node name="MarginContainer" type="MarginContainer" parent="EventTester/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="EventTester/PanelContainer" unique_id=983410510]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 5
@@ -266,130 +267,142 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer" unique_id=154302625]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer" unique_id=884281853]
 layout_mode = 2
 
-[node name="Confetti" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Confetti" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1810729464]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="PlayConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti"]
+[node name="PlayConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti" unique_id=255382818]
 layout_mode = 2
 text = "PlayConfetti"
 script = ExtResource("26_0mxbw")
 event_id = -1
 
-[node name="PlaySongColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti"]
+[node name="PlaySongColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti" unique_id=207898240]
 layout_mode = 2
 text = "PlaySongColorConfetti"
 script = ExtResource("26_0mxbw")
 event_id = -2
 
-[node name="PlayStartColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti"]
+[node name="PlayStartColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti" unique_id=158623876]
 layout_mode = 2
 text = "PlayStartColorConfetti"
 script = ExtResource("26_0mxbw")
 event_id = -3
 
-[node name="PlayEndColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti"]
+[node name="PlayEndColorConfetti" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti" unique_id=196915615]
 layout_mode = 2
 text = "PlayEndColorConfetti"
 script = ExtResource("26_0mxbw")
 event_id = -4
 
-[node name="Fireworks" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ShowChandelier" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti" unique_id=283409381]
+layout_mode = 2
+text = "ShowChandelier"
+script = ExtResource("26_0mxbw")
+event_id = -5
+
+[node name="ShowChandelier2" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confetti" unique_id=896487827]
+layout_mode = 2
+text = "ShowDiscoBall"
+script = ExtResource("26_0mxbw")
+event_id = -6
+
+[node name="Fireworks" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1205131419]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="PlayFireworks" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
+[node name="PlayFireworks" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks" unique_id=608222206]
 layout_mode = 2
 text = "PlayFireworks"
 script = ExtResource("26_0mxbw")
 event_id = -10
 
-[node name="PlayFireworkComet" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
+[node name="PlayFireworkComet" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks" unique_id=1850186398]
 layout_mode = 2
 text = "PlayFireworkComet"
 script = ExtResource("26_0mxbw")
 event_id = -11
 
-[node name="PlayFireworkPion" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
+[node name="PlayFireworkPion" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks" unique_id=1214345012]
 layout_mode = 2
 text = "PlayFireworkPion"
 script = ExtResource("26_0mxbw")
 event_id = -12
 
-[node name="PlayFireworkPalm" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
+[node name="PlayFireworkPalm" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks" unique_id=21267164]
 layout_mode = 2
 text = "PlayFireworkPalm"
 script = ExtResource("26_0mxbw")
 event_id = -13
 
-[node name="PlayFireworkCrossover" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
+[node name="PlayFireworkCrossover" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks" unique_id=484404397]
 layout_mode = 2
 text = "PlayFireworkCrossover"
 script = ExtResource("26_0mxbw")
 event_id = -14
 
-[node name="PlayFireworkFlare" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks"]
+[node name="PlayFireworkFlare" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Fireworks" unique_id=1762972169]
 layout_mode = 2
 text = "PlayFireworkFlare"
 script = ExtResource("26_0mxbw")
 event_id = -15
 
-[node name="Aurora" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Aurora" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=119387724]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="PlayAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Aurora"]
+[node name="PlayAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Aurora" unique_id=379943282]
 layout_mode = 2
 text = "PlayAurora"
 script = ExtResource("26_0mxbw")
 event_id = -20
 
-[node name="PlaySongColorAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Aurora"]
+[node name="PlaySongColorAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Aurora" unique_id=1136174650]
 layout_mode = 2
 text = "PlaySongColorAurora"
 script = ExtResource("26_0mxbw")
 event_id = -21
 
-[node name="StopAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Aurora"]
+[node name="StopAurora" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Aurora" unique_id=411872926]
 layout_mode = 2
 text = "StopAurora"
 script = ExtResource("26_0mxbw")
 event_id = -22
 
-[node name="Bubbles" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Bubbles" type="VBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1076350365]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="PlayBubbles" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Bubbles"]
+[node name="PlayBubbles" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Bubbles" unique_id=1413925224]
 layout_mode = 2
 text = "PlayBubbles"
 script = ExtResource("26_0mxbw")
 event_id = -30
 
-[node name="StopBubbles" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Bubbles"]
+[node name="StopBubbles" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Bubbles" unique_id=1930120159]
 layout_mode = 2
 text = "StopBubbles"
 script = ExtResource("26_0mxbw")
 event_id = -31
 
-[node name="RichTextLabel" type="RichTextLabel" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer" unique_id=1274399443]
 layout_mode = 2
 text = "Flat events:
 TopLightFlashOne (50), TopLightFlashAll (51), BottomLightFlashOne (52), BottomLightFlashAll (53), DarkenRoom (54), SoloLight (55), FadeoutWhite (56), FadeoutBlack (57), StartConfetti (58), TempoFreeMode (59)"
 fit_content = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer" unique_id=2142679416]
 layout_mode = 2
 alignment = 1
 
-[node name="SendColorEvent" type="OptionButton" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="SendColorEvent" type="OptionButton" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=976365976]
 unique_name_in_owner = true
 layout_mode = 2
 item_count = 11
@@ -416,51 +429,51 @@ popup/item_9/id = 21
 popup/item_10/text = "AuroraNoteColor"
 popup/item_10/id = 22
 
-[node name="ColorEventPicker" type="ColorPickerButton" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ColorEventPicker" type="ColorPickerButton" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=765225983]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
-[node name="ColorEventDuration" type="SpinBox" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ColorEventDuration" type="SpinBox" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=202779427]
 unique_name_in_owner = true
 layout_mode = 2
-max_value = 1e+10
+max_value = 10000000000.0
 step = 0.0
 allow_greater = true
 allow_lesser = true
 suffix = "s"
 custom_arrow_step = 1.0
 
-[node name="Button" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Button" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1319508505]
 layout_mode = 2
 text = "Send Color Event"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer" unique_id=694700767]
 layout_mode = 2
 alignment = 1
 
-[node name="StopEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="StopEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=2048471487]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Stop Background Events"
 
-[node name="StopColorEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="StopColorEvents" type="Button" parent="EventTester/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=574397582]
 layout_mode = 2
 text = "Stop Color Events"
 
-[node name="PianoRoll" type="HBoxContainer" parent="."]
+[node name="PianoRoll" type="HBoxContainer" parent="." unique_id=2112783518]
 custom_minimum_size = Vector2(360, 270)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="Piano" type="Control" parent="PianoRoll"]
+[node name="Piano" type="Control" parent="PianoRoll" unique_id=1862905434]
 custom_minimum_size = Vector2(144, 0)
 layout_mode = 2
 mouse_filter = 1
 script = ExtResource("3_mh03t")
 
-[node name="Keys" type="VBoxContainer" parent="PianoRoll/Piano"]
+[node name="Keys" type="VBoxContainer" parent="PianoRoll/Piano" unique_id=756346868]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -470,13 +483,13 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 script = ExtResource("3_132ml")
 
-[node name="Button" type="Button" parent="PianoRoll/Piano"]
+[node name="Button" type="Button" parent="PianoRoll/Piano" unique_id=2045732610]
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 text = "> <"
 
-[node name="ChartView" type="ScrollContainer" parent="PianoRoll"]
+[node name="ChartView" type="ScrollContainer" parent="PianoRoll" unique_id=1323325947]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -484,7 +497,7 @@ horizontal_scroll_mode = 2
 vertical_scroll_mode = 0
 script = ExtResource("8_j823s")
 
-[node name="Chart" type="Control" parent="PianoRoll/ChartView"]
+[node name="Chart" type="Control" parent="PianoRoll/ChartView" unique_id=608070685]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
@@ -492,7 +505,7 @@ size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("9_g46yt")
 
-[node name="WavePreview" type="HBoxContainer" parent="PianoRoll/ChartView/Chart"]
+[node name="WavePreview" type="HBoxContainer" parent="PianoRoll/ChartView/Chart" unique_id=2018431400]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.752941)
 show_behind_parent = true
@@ -503,7 +516,7 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 script = ExtResource("10_8jxge")
 
-[node name="SectStartHandle" type="Control" parent="PianoRoll/ChartView/Chart"]
+[node name="SectStartHandle" type="Control" parent="PianoRoll/ChartView/Chart" unique_id=1804286367]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 9
@@ -513,7 +526,7 @@ grow_vertical = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("10_fs4d4")
 
-[node name="SectEndHandle" type="Control" parent="PianoRoll/ChartView/Chart"]
+[node name="SectEndHandle" type="Control" parent="PianoRoll/ChartView/Chart" unique_id=1318933550]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 9
@@ -523,7 +536,7 @@ grow_vertical = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("10_fs4d4")
 
-[node name="LyricsEditor" type="Control" parent="PianoRoll/ChartView/Chart"]
+[node name="LyricsEditor" type="Control" parent="PianoRoll/ChartView/Chart" unique_id=632571130]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -534,7 +547,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_nxuar")
 
-[node name="EventsEditor" type="Control" parent="PianoRoll/ChartView/Chart"]
+[node name="EventsEditor" type="Control" parent="PianoRoll/ChartView/Chart" unique_id=1517399629]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -546,7 +559,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("17_baaho")
 
-[node name="ColorEventsEditor" type="Control" parent="PianoRoll/ChartView/Chart"]
+[node name="ColorEventsEditor" type="Control" parent="PianoRoll/ChartView/Chart" unique_id=1538379469]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -558,7 +571,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("20_i1tk0")
 
-[node name="PlayheadHandle" type="Control" parent="PianoRoll/ChartView/Chart"]
+[node name="PlayheadHandle" type="Control" parent="PianoRoll/ChartView/Chart" unique_id=1218528716]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 9
@@ -568,85 +581,85 @@ grow_vertical = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("10_fs4d4")
 
-[node name="Settings" type="PanelContainer" parent="."]
+[node name="Settings" type="PanelContainer" parent="." unique_id=277059135]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 script = ExtResource("6_2cfeh")
 
-[node name="MarginC" type="MarginContainer" parent="Settings"]
+[node name="MarginC" type="MarginContainer" parent="Settings" unique_id=1566397181]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxC" type="HBoxContainer" parent="Settings/MarginC"]
+[node name="HBoxC" type="HBoxContainer" parent="Settings/MarginC" unique_id=1280421567]
 layout_mode = 2
 
-[node name="Buttons" type="VBoxContainer" parent="Settings/MarginC/HBoxC"]
+[node name="Buttons" type="VBoxContainer" parent="Settings/MarginC/HBoxC" unique_id=1669752085]
 layout_mode = 2
 
-[node name="ViewSwitcher" type="Button" parent="Settings/MarginC/HBoxC/Buttons"]
+[node name="ViewSwitcher" type="Button" parent="Settings/MarginC/HBoxC/Buttons" unique_id=429657034]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_vertical = 2
 text = "Edit Mode"
 
-[node name="LoadChart" type="Button" parent="Settings/MarginC/HBoxC/Buttons"]
+[node name="LoadChart" type="Button" parent="Settings/MarginC/HBoxC/Buttons" unique_id=1569081158]
 layout_mode = 2
 text = "Load Chart"
 
-[node name="SaveChart" type="Button" parent="Settings/MarginC/HBoxC/Buttons"]
+[node name="SaveChart" type="Button" parent="Settings/MarginC/HBoxC/Buttons" unique_id=2101939255]
 layout_mode = 2
 tooltip_text = "Hold Shift to bypass Save As dialog."
 text = "Save Chart"
 
-[node name="NewChart" type="Button" parent="Settings/MarginC/HBoxC/Buttons"]
+[node name="NewChart" type="Button" parent="Settings/MarginC/HBoxC/Buttons" unique_id=437390919]
 unique_name_in_owner = true
 layout_mode = 2
 text = "New Chart"
 
-[node name="ChartInfo" type="HBoxContainer" parent="Settings/MarginC/HBoxC"]
+[node name="ChartInfo" type="HBoxContainer" parent="Settings/MarginC/HBoxC" unique_id=386281579]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SongInfo" type="VFlowContainer" parent="Settings/MarginC/HBoxC/ChartInfo"]
+[node name="SongInfo" type="VFlowContainer" parent="Settings/MarginC/HBoxC/ChartInfo" unique_id=1604601449]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Title" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" instance=ExtResource("6_hqpqp")]
+[node name="Title" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" unique_id=685003591 instance=ExtResource("6_hqpqp")]
 layout_mode = 2
 json_key = "name"
 field_name = "Title"
 
-[node name="ShortTitle" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" instance=ExtResource("6_hqpqp")]
+[node name="ShortTitle" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" unique_id=1727672665 instance=ExtResource("6_hqpqp")]
 layout_mode = 2
 size_flags_vertical = 6
 json_key = "shortName"
 field_name = "Short Title"
 
-[node name="Author" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" instance=ExtResource("6_hqpqp")]
+[node name="Author" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" unique_id=999451265 instance=ExtResource("6_hqpqp")]
 layout_mode = 2
 json_key = "author"
 field_name = "Author"
 
-[node name="TrackRef" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" instance=ExtResource("6_hqpqp")]
+[node name="TrackRef" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" unique_id=1322243412 instance=ExtResource("6_hqpqp")]
 layout_mode = 2
 size_flags_vertical = 6
 json_key = "trackRef"
 field_name = "Track Ref"
 
-[node name="Genre" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" instance=ExtResource("6_hqpqp")]
+[node name="Genre" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" unique_id=871651654 instance=ExtResource("6_hqpqp")]
 layout_mode = 2
 json_key = "genre"
 field_name = "Genre"
 
-[node name="Description" type="TextEdit" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo"]
+[node name="Description" type="TextEdit" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" unique_id=1369763074]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 20)
 layout_mode = 2
@@ -654,33 +667,33 @@ size_flags_vertical = 3
 placeholder_text = "Description"
 wrap_mode = 1
 
-[node name="Charter" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" instance=ExtResource("6_hqpqp")]
+[node name="Charter" parent="Settings/MarginC/HBoxC/ChartInfo/SongInfo" unique_id=1359460650 instance=ExtResource("6_hqpqp")]
 layout_mode = 2
 json_key = "charter"
 field_name = "Charter"
 
-[node name="HBoxContainer" type="VBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo"]
+[node name="HBoxContainer" type="VBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo" unique_id=2107193653]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer" unique_id=1821863072]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SongInfo2" type="VBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer"]
+[node name="SongInfo2" type="VBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer" unique_id=1465967764]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Length" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo2" instance=ExtResource("7_6mp3m")]
+[node name="Length" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo2" unique_id=128421724 instance=ExtResource("7_6mp3m")]
 layout_mode = 2
 json_key = "endpoint"
 field_name = "Length (beats)"
 min_value = 2.0
-max_value = 1e+07
+max_value = 10000000.0
 
-[node name="Tempo" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo2" instance=ExtResource("7_6mp3m")]
+[node name="Tempo" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo2" unique_id=1770510601 instance=ExtResource("7_6mp3m")]
 layout_mode = 2
 json_key = "tempo"
 field_name = "Tempo"
@@ -688,90 +701,90 @@ is_float = true
 min_value = 1.0
 max_value = 9999.0
 
-[node name="TimeSig" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo2" instance=ExtResource("7_6mp3m")]
+[node name="TimeSig" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo2" unique_id=462846318 instance=ExtResource("7_6mp3m")]
 layout_mode = 2
 json_key = "timesig"
 field_name = "Time Signature"
 min_value = 1.0
-max_value = 1e+07
+max_value = 10000000.0
 
-[node name="SongInfo3" type="VBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer"]
+[node name="SongInfo3" type="VBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer" unique_id=155588287]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 
-[node name="Year" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo3" instance=ExtResource("7_6mp3m")]
+[node name="Year" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo3" unique_id=792122914 instance=ExtResource("7_6mp3m")]
 layout_mode = 2
 json_key = "year"
 field_name = "Year"
 min_value = -9999.0
 max_value = 9999.0
 
-[node name="Diff" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo3" instance=ExtResource("7_6mp3m")]
+[node name="Diff" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo3" unique_id=502890994 instance=ExtResource("7_6mp3m")]
 layout_mode = 2
 json_key = "difficulty"
 field_name = "Difficulty"
 max_value = 10.0
 
-[node name="NoteSpacing" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo3" instance=ExtResource("7_6mp3m")]
+[node name="NoteSpacing" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer/VBoxContainer/SongInfo3" unique_id=193708220 instance=ExtResource("7_6mp3m")]
 layout_mode = 2
 json_key = "savednotespacing"
 field_name = "Note Spacing"
 min_value = 10.0
 max_value = 480.0
 
-[node name="TootTallyUpload" type="Button" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer"]
+[node name="TootTallyUpload" type="Button" parent="Settings/MarginC/HBoxC/ChartInfo/HBoxContainer" unique_id=1399351064]
 layout_mode = 2
 tooltip_text = "Uploads the chart to TootTally's Difficulty Calculator, which provides a rough estimate for its difficulty along with some checks to TootTally's rating criteria."
 text = "Calculate Difficulty via TootTally"
 script = ExtResource("7_h0pqp")
 
-[node name="ColorSettings" type="VBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo"]
+[node name="ColorSettings" type="VBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo" unique_id=1574732967]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Colors" type="HBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings"]
+[node name="Colors" type="HBoxContainer" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings" unique_id=1894166749]
 layout_mode = 2
 
-[node name="StartColor" type="ColorPickerButton" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings/Colors"]
+[node name="StartColor" type="ColorPickerButton" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings/Colors" unique_id=1907000294]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 color = Color(0.913725, 0.188235, 0.270588, 1)
 edit_alpha = false
 
-[node name="EndColor" type="ColorPickerButton" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings/Colors"]
+[node name="EndColor" type="ColorPickerButton" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings/Colors" unique_id=824613138]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 color = Color(1, 0.964706, 0.329412, 1)
 edit_alpha = false
 
-[node name="UseColors" type="CheckBox" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings"]
+[node name="UseColors" type="CheckBox" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings" unique_id=1574699224]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Use custom
 note colors"
 
-[node name="ColorPreview" type="Control" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings"]
+[node name="ColorPreview" type="Control" parent="Settings/MarginC/HBoxC/ChartInfo/ColorSettings" unique_id=728380776]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("10_14v0o")
 
-[node name="EditSettings" type="VFlowContainer" parent="Settings/MarginC/HBoxC"]
+[node name="EditSettings" type="VFlowContainer" parent="Settings/MarginC/HBoxC" unique_id=1374146208]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/v_separation = 0
 
-[node name="ZoomEntry" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="ZoomEntry" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=99601199]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/EditSettings/ZoomEntry"]
+[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/EditSettings/ZoomEntry" unique_id=1484097887]
 layout_mode = 2
 text = "Zoom:"
 
-[node name="ZoomLevel" type="HSlider" parent="Settings/MarginC/HBoxC/EditSettings/ZoomEntry"]
+[node name="ZoomLevel" type="HSlider" parent="Settings/MarginC/HBoxC/EditSettings/ZoomEntry" unique_id=549365417]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -782,19 +795,19 @@ max_value = 4.0
 step = 0.05
 value = 1.0
 
-[node name="ZoomReset" type="Button" parent="Settings/MarginC/HBoxC/EditSettings/ZoomEntry"]
+[node name="ZoomReset" type="Button" parent="Settings/MarginC/HBoxC/EditSettings/ZoomEntry" unique_id=2116092451]
 layout_mode = 2
 icon = ExtResource("14_8wa4s")
 
-[node name="TimeSnapping" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="TimeSnapping" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1952612238]
 layout_mode = 2
 
-[node name="TimeSnapChk" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/TimeSnapping"]
+[node name="TimeSnapChk" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/TimeSnapping" unique_id=1787881171]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 
-[node name="TimingSnap" type="SpinBox" parent="Settings/MarginC/HBoxC/EditSettings/TimeSnapping"]
+[node name="TimingSnap" type="SpinBox" parent="Settings/MarginC/HBoxC/EditSettings/TimeSnapping" unique_id=1659973626]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(204, 0)
 layout_mode = 2
@@ -805,15 +818,15 @@ alignment = 2
 prefix = "Timing snap: 1/"
 suffix = "beats"
 
-[node name="PitchSnapping" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="PitchSnapping" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1476439324]
 layout_mode = 2
 
-[node name="PitchSnapChk" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/PitchSnapping"]
+[node name="PitchSnapChk" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/PitchSnapping" unique_id=1356270414]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 
-[node name="PitchSnap" type="SpinBox" parent="Settings/MarginC/HBoxC/EditSettings/PitchSnapping"]
+[node name="PitchSnap" type="SpinBox" parent="Settings/MarginC/HBoxC/EditSettings/PitchSnapping" unique_id=1781452302]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(204, 0)
 layout_mode = 2
@@ -825,11 +838,11 @@ alignment = 2
 prefix = "Pitch snap: 1/"
 suffix = "semitones"
 
-[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1892779402]
 layout_mode = 2
 text = "Background events visibility:"
 
-[node name="EventsMode" type="OptionButton" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="EventsMode" type="OptionButton" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1372368222]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -843,39 +856,39 @@ popup/item_2/id = 2
 popup/item_3/text = "Color Events"
 popup/item_3/id = 3
 
-[node name="DrawMicrotones" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="DrawMicrotones" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=631389357]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Draw Microtones"
 
-[node name="InsertTapNotes" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="InsertTapNotes" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1743162819]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Insertions with this box checked will be tap notes, instead of using the length of the current subdivision."
 text = "Insert tap notes"
 
-[node name="DootToggle" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="DootToggle" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=292228548]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Doot on pitch change"
 
-[node name="PropagateChanges" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="PropagateChanges" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1361526936]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Propagate changes in slides"
 
-[node name="ShowMouseTargets" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="ShowMouseTargets" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=279393255]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Outline mouse targets
 "
 
-[node name="HBox" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="HBox" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1030779365]
 layout_mode = 2
 
-[node name="BuildWaveform" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/HBox"]
+[node name="BuildWaveform" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/HBox" unique_id=444181598]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -884,7 +897,7 @@ button_pressed = true
 text = "Show audio preview"
 alignment = 2
 
-[node name="HiResWave" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/HBox"]
+[node name="HiResWave" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/HBox" unique_id=45277493]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -892,18 +905,18 @@ tooltip_text = "This might take a while!"
 text = "Hi-Res"
 alignment = 2
 
-[node name="FFmpegHelp" type="Button" parent="Settings/MarginC/HBoxC/EditSettings/HBox"]
+[node name="FFmpegHelp" type="Button" parent="Settings/MarginC/HBoxC/EditSettings/HBox" unique_id=808865467]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 tooltip_text = "How do I use these features?"
 text = "  ?  "
 
-[node name="PreviewLabel" type="Label" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="PreviewLabel" type="Label" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1600849450]
 layout_mode = 2
 text = "Audio preview type:"
 
-[node name="PreviewType" type="OptionButton" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="PreviewType" type="OptionButton" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=302027098]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -913,90 +926,90 @@ popup/item_0/id = 0
 popup/item_1/text = "Spectrogram"
 popup/item_1/id = 1
 
-[node name="PreviewGenLabel" type="Label" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="PreviewGenLabel" type="Label" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1809098261]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="RefreshButton" type="Button" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="RefreshButton" type="Button" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=1513364176]
 visible = false
 layout_mode = 2
 size_flags_vertical = 10
 text = "Force note refresh"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/MarginC/HBoxC/EditSettings" unique_id=2105629583]
 layout_mode = 2
 
-[node name="LoadCompChart" type="Button" parent="Settings/MarginC/HBoxC/EditSettings/HBoxContainer"]
+[node name="LoadCompChart" type="Button" parent="Settings/MarginC/HBoxC/EditSettings/HBoxContainer" unique_id=1879411628]
 layout_mode = 2
 text = "Load Comparison Chart"
 
-[node name="ShowHideCompChart" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/HBoxContainer"]
+[node name="ShowHideCompChart" type="CheckBox" parent="Settings/MarginC/HBoxC/EditSettings/HBoxContainer" unique_id=1167195531]
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
 text = "Visible"
 
-[node name="SectionSelection" type="VBoxContainer" parent="Settings/MarginC/HBoxC"]
+[node name="SectionSelection" type="VBoxContainer" parent="Settings/MarginC/HBoxC" unique_id=1878125879]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="HBox2" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection"]
+[node name="HBox2" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection" unique_id=593216102]
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/HBox2"]
+[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/HBox2" unique_id=1986677527]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Playback Controls:"
 
-[node name="HBox" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection"]
+[node name="HBox" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection" unique_id=2114071012]
 visible = false
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/HBox"]
+[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/HBox" unique_id=729267380]
 layout_mode = 2
 text = "Start:"
 
-[node name="SectionStart" type="SpinBox" parent="Settings/MarginC/HBoxC/SectionSelection/HBox"]
+[node name="SectionStart" type="SpinBox" parent="Settings/MarginC/HBoxC/SectionSelection/HBox" unique_id=1583079132]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
 
-[node name="Label2" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/HBox"]
+[node name="Label2" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/HBox" unique_id=1596434463]
 layout_mode = 2
 text = "Length:"
 
-[node name="SectionLength" type="SpinBox" parent="Settings/MarginC/HBoxC/SectionSelection/HBox"]
+[node name="SectionLength" type="SpinBox" parent="Settings/MarginC/HBoxC/SectionSelection/HBox" unique_id=612176605]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
 
-[node name="HBox4" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection"]
+[node name="HBox4" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection" unique_id=912539463]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 6
 alignment = 2
 
-[node name="MetroIcon" type="TextureRect" parent="Settings/MarginC/HBoxC/SectionSelection/HBox4"]
+[node name="MetroIcon" type="TextureRect" parent="Settings/MarginC/HBoxC/SectionSelection/HBox4" unique_id=633175252]
 layout_mode = 2
 texture = ExtResource("11_maqbd")
 stretch_mode = 2
 
-[node name="MetroChk" type="CheckBox" parent="Settings/MarginC/HBoxC/SectionSelection/HBox4"]
+[node name="MetroChk" type="CheckBox" parent="Settings/MarginC/HBoxC/SectionSelection/HBox4" unique_id=2008853097]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PreviewButton" type="Button" parent="Settings/MarginC/HBoxC/SectionSelection/HBox4"]
+[node name="PreviewButton" type="Button" parent="Settings/MarginC/HBoxC/SectionSelection/HBox4" unique_id=306547059]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 2.08165e-12)
 layout_mode = 2
 text = "Preview"
 
-[node name="PlayheadPos" type="SpinBox" parent="Settings/MarginC/HBoxC/SectionSelection/HBox4"]
+[node name="PlayheadPos" type="SpinBox" parent="Settings/MarginC/HBoxC/SectionSelection/HBox4" unique_id=1765106256]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Playhead Position"
@@ -1004,15 +1017,15 @@ focus_mode = 2
 step = 2.08165e-12
 custom_arrow_step = 1.0
 
-[node name="Vol" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection"]
+[node name="Vol" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection" unique_id=1204600409]
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/Vol"]
+[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/Vol" unique_id=726599087]
 layout_mode = 2
 text = "Track 🔊"
 
-[node name="TrackVolSlider" type="HSlider" parent="Settings/MarginC/HBoxC/SectionSelection/Vol"]
+[node name="TrackVolSlider" type="HSlider" parent="Settings/MarginC/HBoxC/SectionSelection/Vol" unique_id=259983472]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1023,19 +1036,19 @@ step = 0.1
 tick_count = 7
 ticks_on_borders = true
 
-[node name="VolReset" type="Button" parent="Settings/MarginC/HBoxC/SectionSelection/Vol"]
+[node name="VolReset" type="Button" parent="Settings/MarginC/HBoxC/SectionSelection/Vol" unique_id=922797549]
 layout_mode = 2
 icon = ExtResource("14_8wa4s")
 
-[node name="Vol2" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection"]
+[node name="Vol2" type="HBoxContainer" parent="Settings/MarginC/HBoxC/SectionSelection" unique_id=769785440]
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/Vol2"]
+[node name="Label" type="Label" parent="Settings/MarginC/HBoxC/SectionSelection/Vol2" unique_id=382724344]
 layout_mode = 2
 text = "Toot 🔊 "
 
-[node name="TootVolSlider" type="HSlider" parent="Settings/MarginC/HBoxC/SectionSelection/Vol2"]
+[node name="TootVolSlider" type="HSlider" parent="Settings/MarginC/HBoxC/SectionSelection/Vol2" unique_id=1503064673]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1046,23 +1059,23 @@ step = 0.1
 tick_count = 7
 ticks_on_borders = true
 
-[node name="VolReset" type="Button" parent="Settings/MarginC/HBoxC/SectionSelection/Vol2"]
+[node name="VolReset" type="Button" parent="Settings/MarginC/HBoxC/SectionSelection/Vol2" unique_id=1544447836]
 layout_mode = 2
 icon = ExtResource("14_8wa4s")
 
-[node name="LyricsTools" type="VBoxContainer" parent="Settings/MarginC/HBoxC"]
+[node name="LyricsTools" type="VBoxContainer" parent="Settings/MarginC/HBoxC" unique_id=2050585573]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ShowLyrics" type="CheckBox" parent="Settings/MarginC/HBoxC/LyricsTools"]
+[node name="ShowLyrics" type="CheckBox" parent="Settings/MarginC/HBoxC/LyricsTools" unique_id=674411236]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 2
 text = "Show lyrics editor"
 
-[node name="Label3" type="Label" parent="Settings/MarginC/HBoxC/LyricsTools"]
+[node name="Label3" type="Label" parent="Settings/MarginC/HBoxC/LyricsTools" unique_id=692191200]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -1074,7 +1087,7 @@ Next Bar will instert a new lyric at the next bar."
 mouse_filter = 1
 text = "Enter key mode:"
 
-[node name="EnterKeyMode" type="OptionButton" parent="Settings/MarginC/HBoxC/LyricsTools"]
+[node name="EnterKeyMode" type="OptionButton" parent="Settings/MarginC/HBoxC/LyricsTools" unique_id=516411158]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -1086,24 +1099,24 @@ popup/item_0/id = 0
 popup/item_1/text = "Next Bar"
 popup/item_1/id = 1
 
-[node name="CopyLyrics" type="Button" parent="Settings/MarginC/HBoxC/LyricsTools"]
+[node name="CopyLyrics" type="Button" parent="Settings/MarginC/HBoxC/LyricsTools" unique_id=1119046034]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 10
 text = "Copy section lyrics"
 
-[node name="HelpButton" type="Button" parent="Settings/MarginC/HBoxC"]
+[node name="HelpButton" type="Button" parent="Settings/MarginC/HBoxC" unique_id=2000760263]
 layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "Info & Usage"
 text = "   ?   "
 
-[node name="Alert" type="Node2D" parent="."]
+[node name="Alert" type="Node2D" parent="." unique_id=1184983659]
 unique_name_in_owner = true
 script = ExtResource("16_yl2q4")
 
-[node name="Label" type="Label" parent="Alert"]
+[node name="Label" type="Label" parent="Alert" unique_id=1781845559]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5

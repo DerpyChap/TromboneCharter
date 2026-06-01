@@ -20,6 +20,7 @@ var id : int:
 
 func set_label():
     match id:
+        # Flat events
         59:
             label.text = "TempoFreeMode"
         58:
@@ -40,6 +41,7 @@ func set_label():
             label.text = "TopLightFlashAll"
         50:
             label.text = "TopLightFlashOne"
+        # VR events
         -1:
             label.text = "PlayConfetti"
         -2:
@@ -48,6 +50,10 @@ func set_label():
             label.text = "PlayStartColorConfetti"
         -4:
             label.text = "PlayEndColorConfetti"
+        -5:
+            label.text = "ShowChandelier"
+        -6:
+            label.text = "ShowDiscoBall"
         -10:
             label.text = "PlayFireworks"
         -11:

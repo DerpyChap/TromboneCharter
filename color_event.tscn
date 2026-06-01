@@ -1,38 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://h854lswfxeuf"]
+[gd_scene format=3 uid="uid://h854lswfxeuf"]
 
 [ext_resource type="Script" uid="uid://20f5ob7hof1k" path="res://event.gd" id="1_twn65"]
 [ext_resource type="Texture2D" uid="uid://bf23fo001m0n4" path="res://trashcan.svg" id="2_10jd8"]
 [ext_resource type="Texture2D" uid="uid://cu0ygufwrvrfu" path="res://draghandle.svg" id="3_utvw4"]
 
-[node name="BGEvent" type="Control"]
+[node name="BGEvent" type="Control" unique_id=1294584801]
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
 script = ExtResource("1_twn65")
 
-[node name="DeleteButton" type="Button" parent="."]
+[node name="DeleteButton" type="Button" parent="." unique_id=1548389432]
 layout_mode = 1
 offset_right = 40.0
 offset_bottom = 40.0
 focus_mode = 1
 icon = ExtResource("2_10jd8")
 
-[node name="SpinBox" type="SpinBox" parent="."]
+[node name="SpinBox" type="SpinBox" parent="." unique_id=657279205]
 layout_mode = 1
 anchors_preset = -1
 offset_top = 164.0
 offset_right = 83.0625
 offset_bottom = 195.0
-min_value = -1e+12
-max_value = 1e+12
+min_value = -1000000000000.0
+max_value = 1000000000000.0
 rounded = true
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 select_all_on_focus = true
 
-[node name="LineEdit" type="LineEdit" parent="."]
+[node name="LineEdit" type="LineEdit" parent="." unique_id=1687185367]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -44,7 +45,7 @@ offset_bottom = -254.0
 grow_vertical = 2
 expand_to_text_length = true
 
-[node name="DragHandle" type="TextureButton" parent="."]
+[node name="DragHandle" type="TextureButton" parent="." unique_id=318570414]
 layout_mode = 1
 anchors_preset = -1
 offset_left = -3.0
@@ -56,7 +57,7 @@ focus_mode = 1
 mouse_default_cursor_shape = 15
 texture_normal = ExtResource("3_utvw4")
 
-[node name="EventName" type="Label" parent="."]
+[node name="EventName" type="Label" parent="." unique_id=261685309]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 194.0

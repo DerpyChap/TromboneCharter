@@ -10,7 +10,7 @@ var text : String:
 	set(value):
 		text = value
 #		if line_edit != null: line_edit.text = value
-@onready var line_edit : LineEdit = $LineEdit
+@onready var line_edit : LineEdit = get_node_or_null("LineEdit")
 @onready var editor = get_parent()
 @onready var chart = editor.chart
 @onready var chart_view = chart.get_parent()

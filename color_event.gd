@@ -5,109 +5,109 @@ extends BGEvent
 @onready var _duration_spinbox : SpinBox = $UI/Duration
 @onready var _ui : Control = $UI
 @onready var color : Color:
-    set(value):
-        color = value
-        if _color_picker:
-            _color_picker.color = value
+	set(value):
+		color = value
+		if _color_picker:
+			_color_picker.color = value
 @onready var color_editor : ColorEventsEditor = get_parent()
 
 var pitch : float:
-    set(value):
-        pitch = value
-        if _ui && chart:
-            _ui.position.y = chart.pitch_to_height(value)
+	set(value):
+		pitch = value
+		if _ui && chart:
+			_ui.position.y = chart.pitch_to_height(value)
 
 @onready var duration : float:
-    set(value):
-        duration = value
-        if _duration_spinbox:
-            _duration_spinbox.value = value
+	set(value):
+		duration = value
+		if _duration_spinbox:
+			_duration_spinbox.value = value
 
 func _color_event_ready():
-    _ui.position.y = chart.pitch_to_height(pitch)
-    _duration_spinbox.value = duration
+	_ui.position.y = chart.pitch_to_height(pitch)
+	_duration_spinbox.value = duration
 
 func set_label():
-    match id:
-        0:
-            label.text = "FarLeftLight"
-        1:
-            label.text = "MidLeftLight"
-        2:
-            label.text = "MidRightLight"
-        3:
-            label.text = "FarRightLight"
-        10:
-            label.text = "FarLeftFloorLight"
-        11:
-            label.text = "MidLeftFloorLight"
-        12:
-            label.text = "MidRightFloorLight"
-        13:
-            label.text = "FarRightFloorLight"
-        20:
-            label.text = "AuroraTopColor"
-        21:
-            label.text = "AuroraBottomColor"
-        22:
-            label.text = "AuroraNoteColor"
-        _:
-            label.text = ""
+	match id:
+		0:
+			label.text = "FarLeftLight"
+		1:
+			label.text = "MidLeftLight"
+		2:
+			label.text = "MidRightLight"
+		3:
+			label.text = "FarRightLight"
+		10:
+			label.text = "FarLeftFloorLight"
+		11:
+			label.text = "MidLeftFloorLight"
+		12:
+			label.text = "MidRightFloorLight"
+		13:
+			label.text = "FarRightFloorLight"
+		20:
+			label.text = "AuroraTopColor"
+		21:
+			label.text = "AuroraBottomColor"
+		22:
+			label.text = "AuroraNoteColor"
+		_:
+			label.text = ""
 
 func _gui_input(event) -> void:
-    if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
-        queue_free()
-        Global.working_tmb.color_events = color_editor.package_events()
-    elif Input.is_action_pressed("color_event_delete"):
-        queue_free()
-        Global.working_tmb.color_events = color_editor.package_events()
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
+		queue_free()
+		Global.working_tmb.color_events = color_editor.package_events()
+	elif Input.is_action_pressed("color_event_delete"):
+		queue_free()
+		Global.working_tmb.color_events = color_editor.package_events()
 
 func _process(_delta):
-    if !dragging: return
-    if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-        dragging = false
-        bar = chart.x_to_bar(position.x)
-        Global.working_tmb.color_events = color_editor.package_events()
-        return
-    var pos = chart.get_local_mouse_position() - Vector2(0, 20)
-    var snapped_pos = chart.to_snapped(pos)
-    bar = snapped_pos.x
-    pitch = clamp(snapped_pos.y, -165, 178.75)
+	if !dragging: return
+	if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		dragging = false
+		bar = chart.x_to_bar(position.x)
+		Global.working_tmb.color_events = color_editor.package_events()
+		return
+	var pos = chart.get_local_mouse_position() - Vector2(0, 20)
+	var snapped_pos = chart.to_snapped(pos)
+	bar = snapped_pos.x
+	pitch = clamp(snapped_pos.y, -165, 178.75)
 
 func _draw():
-    draw_polyline_colors([Vector2.ZERO,Vector2(0, size.y)],
-            [Color.YELLOW,Color.TRANSPARENT],2.0
-        )
+	draw_polyline_colors([Vector2.ZERO,Vector2(0, size.y)],
+			[Color.YELLOW,Color.TRANSPARENT],2.0
+		)
 
 func _on_delete_button_pressed():
-    queue_free()
-    Global.working_tmb.color_events = color_editor.package_events()
+	queue_free()
+	Global.working_tmb.color_events = color_editor.package_events()
 
 func _on_spin_box_value_changed(new_id):
-    if id != new_id:
-        id = new_id
-        Global.working_tmb.color_events = color_editor.package_events()
-        queue_redraw()
+	if id != new_id:
+		id = new_id
+		Global.working_tmb.color_events = color_editor.package_events()
+		queue_redraw()
 
 func _on_color_picker_button_ready() -> void:
-    $UI/ColorPickerButton.color = color
+	$UI/ColorPickerButton.color = color
 
 func _on_color_picker_button_popup_closed() -> void: 
-    if _color_picker.color != color:
-        color = _color_picker.color
-        color_editor.last_color = color
-        Global.working_tmb.color_events = color_editor.package_events()
+	if _color_picker.color != color:
+		color = _color_picker.color
+		color_editor.last_color = color
+		Global.working_tmb.color_events = color_editor.package_events()
 
 func _on_duration_value_changed(value: float) -> void:
-    if duration != value:
-        duration = value
-        Global.working_tmb.color_events = color_editor.package_events()
+	if duration != value:
+		duration = value
+		Global.working_tmb.color_events = color_editor.package_events()
 
-func _on_focus_entered() -> void:
-    print("moving to front")
-    move_to_front()
+func _on_focus_entered(event: InputEvent) -> void:
+	print("moving to front")
+	move_to_front()
 
 func _notification(what):
-    if what == NOTIFICATION_RESIZED:
-            if _ui:
-                _ui.position.y = chart.pitch_to_height(pitch)
+	if what == NOTIFICATION_RESIZED:
+			if _ui:
+				_ui.position.y = chart.pitch_to_height(pitch)
