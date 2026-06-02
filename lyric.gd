@@ -10,6 +10,9 @@ var text : String:
 	set(value):
 		text = value
 #		if line_edit != null: line_edit.text = value
+
+var newline : bool = false
+
 @onready var line_edit : LineEdit = get_node_or_null("LineEdit")
 @onready var editor = get_parent()
 @onready var chart = editor.chart
@@ -103,3 +106,12 @@ func _on_line_edit_gui_input(event:InputEvent) -> void:
 func _on_line_edit_focus_entered() -> void:
 	if !is_in_view:
 		scroll_to_lyric()
+
+func _on_newline_ready() -> void:
+	if newline:
+		print("is newline")
+	%Newline.set_pressed_no_signal(newline)
+
+
+func _on_newline_toggled(toggled_on: bool) -> void:
+	newline = toggled_on

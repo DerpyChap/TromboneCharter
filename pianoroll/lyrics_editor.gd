@@ -9,6 +9,7 @@ var _update_queued := false
 
 func _ready():
 	Global.tmb_updated.connect(_on_tmb_update)
+	get_tree().current_scene.chart_loaded.connect(_on_chart_loaded)
 
 func _on_tmb_update(): _update_queued = true
 
@@ -19,9 +20,12 @@ func package_lyrics() -> Array:
 	var result := []
 	for lyric in get_children():
 		if !(lyric is Lyric) || lyric.is_queued_for_deletion() || (lyric is BGEvent): continue
+		var text = lyric.text
+		if lyric.newline:
+			text += "\n"
 		var dict := {
 			"bar" = lyric.bar,
-			"text" = lyric.text
+			"text" = text
 		}
 		result.append(dict)
 	result.sort_custom(func(a, b): return (a.bar < b.bar))
@@ -29,7 +33,13 @@ func package_lyrics() -> Array:
 
 
 func _add_lyric(bar:float,lyric:String):
+	print(lyric)
 	var new_lyric = lyric_scn.instantiate()
+	if lyric.ends_with("\n"):
+		new_lyric.newline = true
+		lyric.trim_suffix("\n")
+	else:
+		new_lyric.newline = false
 	new_lyric.text = lyric
 	new_lyric.bar = bar
 	add_child(new_lyric)
